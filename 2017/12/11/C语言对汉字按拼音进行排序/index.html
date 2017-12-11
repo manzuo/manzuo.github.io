@@ -5,17 +5,17 @@
   
   <title>C语言对汉字按拼音进行排序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#include #include #includestruct student{    char name[10];} stu[42];int main(){    int n;    struct student s;      scanf(“%d”,&amp;amp;n);      for (int i=1;i&amp;lt;=n;i++){          scanf(“%s”,stu[i].name">
+  <meta name="description" content="由于笔者最近要用C语言写一个简单（粗糙）的学生成绩管理系统，所以遇到一个问题：   需要按照学生的姓名将学生排序！   问题的难点是学生的名字是中文汉字的，该怎么比较大小呢？   经过一番度娘，笔者发现了一个神奇的strcoll函数：    函数声明：            int strcoll(const char str1, const char str2)   参数：">
 <meta name="keywords" content="hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言对汉字按拼音进行排序">
 <meta property="og:url" content="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#include #include #includestruct student{    char name[10];} stu[42];int main(){    int n;    struct student s;      scanf(“%d”,&amp;amp;n);      for (int i=1;i&amp;lt;=n;i++){          scanf(“%s”,stu[i].name">
-<meta property="og:updated_time" content="2017-12-11T08:28:01.292Z">
+<meta property="og:description" content="由于笔者最近要用C语言写一个简单（粗糙）的学生成绩管理系统，所以遇到一个问题：   需要按照学生的姓名将学生排序！   问题的难点是学生的名字是中文汉字的，该怎么比较大小呢？   经过一番度娘，笔者发现了一个神奇的strcoll函数：    函数声明：            int strcoll(const char str1, const char str2)   参数：">
+<meta property="og:updated_time" content="2017-12-11T09:09:00.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言对汉字按拼音进行排序">
-<meta name="twitter:description" content="#include #include #includestruct student{    char name[10];} stu[42];int main(){    int n;    struct student s;      scanf(“%d”,&amp;amp;n);      for (int i=1;i&amp;lt;=n;i++){          scanf(“%s”,stu[i].name">
+<meta name="twitter:description" content="由于笔者最近要用C语言写一个简单（粗糙）的学生成绩管理系统，所以遇到一个问题：   需要按照学生的姓名将学生排序！   问题的难点是学生的名字是中文汉字的，该怎么比较大小呢？   经过一番度娘，笔者发现了一个神奇的strcoll函数：    函数声明：            int strcoll(const char str1, const char str2)   参数：">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -86,14 +86,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#include<stdio.h></stdio.h></p>
-<p>#include<string.h></string.h></p>
-<p>#include<string.h><br>struct student{<br>    char name[10];<br>} stu[42];<br>int main(){<br>    int n;<br>    struct student s;<br>      scanf(“%d”,&amp;n);<br>      for (int i=1;i&lt;=n;i++){<br>          scanf(“%s”,stu[i].name);<br>      }<br>      for (int i=1;i&lt;=n-1;i++){<br>          for(int j=1;j&lt;=n-i;j++){<br>              if(strcoll(stu[j].name,stu[j+1].name)&gt;=0){<br>                  s=stu[j];<br>                  stu[j]=stu[j+1];<br>                  stu[j+1]=s;<br>              }<br>          }<br>      }<br>      printf(“\n\n”);<br>      for(int i=1;i&lt;=n;i++){<br>          printf(“%s\n”,stu[i].name);<br>      }<br>     return 0;<br>}</string.h></p>
+        <p>  由于笔者最近要用C语言写一个简单（粗糙）的学生成绩管理系统，所以遇到一个问题：<br>   需要按照学生的姓名将学生排序！<br>   问题的难点是学生的名字是中文汉字的，该怎么比较大小呢？<br>   经过一番度娘，笔者发现了一个神奇的strcoll函数：</p>
+<p>   函数声明：<br>            int strcoll(const char <em>str1, const char </em>str2)<br>   参数：<br>             str1 – 这是第一个要比较的字符串。</p>
+<pre><code>str2 -- 这是第二个进行比较的字符串。
+</code></pre><p>   返回值：<br>        如果返回值&lt;0，则表明str1小于str2（如 “李”（li）&lt;”张”（zhang））</p>
+<pre><code>如果返回值，如果&gt; 0，则表明str2 小于 str1 
+
+如果返回值= 0，则表明str1 等于str2  （在尝试的时候 笔者发现： 如果两个名字对应的拼音都一样，
+                                        但字不一样时返回值不为0，但除拼音外的判断条件笔者也没研究出来）
+</code></pre><p>下面是一个应用的例子：                                                </p>
+<p>#include<stdio.h></stdio.h></p>
+<p>#include<string.h><br>struct student{<br>    char name[10];<br>} stu[42]; //声明结构体数组<br>int main(){<br>    int n;<br>    struct student s;<br>      scanf(“%d”,&amp;n);//判断人数<br>      for (int i=1;i&lt;=n;i++){<br>          scanf(“%s”,stu[i].name);//从键盘读取学生名字<br>      }<br>      for (int i=1;i&lt;=n-1;i++){<br>          for(int j=1;j&lt;=n-i;j++){<br>              if(strcoll(stu[j].name,stu[j+1].name)&gt;=0){ //按拼音从”a”到”z”排序<br>                  s=stu[j];<br>                  stu[j]=stu[j+1];<br>                  stu[j+1]=s;<br>              }<br>          }<br>      }<br>      printf(“\n\n”);<br>      for(int i=1;i&lt;=n;i++){<br>          printf(“%s\n”,stu[i].name);//输出<br>      }<br>     return 0;<br>}</string.h></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjb1y7utf00000opwapyqemr5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjb1z8pi70000lgpwib3tyo7m" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -103,15 +111,6 @@
   
     
 <nav id="article-nav">
-  
-    <a href="/2017/12/11/新博客/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          新博客
-        
-      </div>
-    </a>
   
   
     <a href="/2017/11/13/NULL和0的区别/" id="article-nav-older" class="article-nav-link-wrap">
@@ -135,7 +134,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
     </div>
   </div>
 
@@ -145,7 +144,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
+      <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a>
     </div>
   </div>
 
@@ -165,10 +164,6 @@
     <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2017/12/11/新博客/">新博客</a>
-          </li>
         
           <li>
             <a href="/2017/12/11/C语言对汉字按拼音进行排序/">C语言对汉字按拼音进行排序</a>
