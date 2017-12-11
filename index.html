@@ -61,6 +61,35 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言对汉字按拼音进行排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/11/C语言对汉字按拼音进行排序/" class="article-date">
+  <time datetime="2017-12-11T07:22:56.139Z" itemprop="datePublished">2017-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#include<stdio.h></stdio.h></p>
+<p>#include<string.h></string.h></p>
+<p>#include<string.h><br>struct student{<br>    char name[10];<br>} stu[42];<br>int main(){<br>    int n;<br>    struct student s;<br>      scanf(“%d”,&amp;n);<br>      for (int i=1;i&lt;=n;i++){<br>          scanf(“%s”,stu[i].name);<br>      }<br>      for (int i=1;i&lt;=n-1;i++){<br>          for(int j=1;j&lt;=n-i;j++){<br>              if(strcoll(stu[j].name,stu[j+1].name)&gt;=0){<br>                  s=stu[j];<br>                  stu[j]=stu[j+1];<br>                  stu[j+1]=s;<br>              }<br>          }<br>      }<br>      printf(“\n\n”);<br>      for(int i=1;i&lt;=n;i++){<br>          printf(“%s\n”,stu[i].name);<br>      }<br>     return 0;<br>}</string.h></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjb1xbryk000004pwk7umbnrw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-NULL和0的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/13/NULL和0的区别/" class="article-date">
@@ -89,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cj9ya9bc70002ckpwpiizy84w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjb1xbryk000104pwmoj3nnby" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cj9ya9bbi0001ckpwe6m62lu1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjb1xbryk000304pwuo9d1bml" class="article-share-link">Share</a>
       
       
     </footer>
@@ -171,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/11/hello-world/" data-id="cj9ya9bai0000ckpw9l91ifx0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/11/hello-world/" data-id="cjb1xbryk000204pw8ms9vhpx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
     </div>
   </div>
 
@@ -209,6 +238,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/12/11/C语言对汉字按拼音进行排序/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2017/11/13/NULL和0的区别/">NULL和0的区别</a>
