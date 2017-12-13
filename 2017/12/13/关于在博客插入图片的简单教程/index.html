@@ -16,7 +16,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/03.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/04.png">
 <meta property="og:image" content="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/05.png">
-<meta property="og:updated_time" content="2017-12-13T17:19:55.637Z">
+<meta property="og:updated_time" content="2017-12-13T17:24:49.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于在博客中插入图片的简单教程">
 <meta name="twitter:description" content="作为一个刚刚开始写博客的新手，笔者也遇到了一个问题，那就是如何博客里插入照片呢？  今天一位大佬教了我一个很简单的方法，即hexo自带的插入图片的方法。  话不多说，开始教程: 配置_config.yml文件      首先，要把hexo目录下的_config.yml文件打开，找到  post_asset_folder，并把值改成“true”  如图：    新建一篇博客  通过 hexo n">
@@ -97,10 +97,12 @@
   <img src="/2017/12/13/关于在博客插入图片的简单教程/02.png">
 <h2 id="新建一篇博客"><a href="#新建一篇博客" class="headerlink" title="新建一篇博客"></a>新建一篇博客</h2><p>  通过 hexo new 的命令新建一篇博客时，你会发现，除了生成.md格式的文件，还生成了个同名的文件夹，<br>  没错，这个文件夹就是拿来放你要引用的图片的<br>  <img src="/2017/12/13/关于在博客插入图片的简单教程/03.png"></p>
 <p>  把你需要用到的图片放到文件夹里，并起个简短好记的名字（方便调用）<br>  <img src="/2017/12/13/关于在博客插入图片的简单教程/04.png"></p>
-<h2 id="引用图片"><a href="#引用图片" class="headerlink" title="引用图片"></a>引用图片</h2><p>  接下来 就要隆重介绍调用图片的语句（单引号里的内容，包括大括号）了</p>
+<h2 id="引用图片"><a href="#引用图片" class="headerlink" title="引用图片"></a>引用图片</h2><p>  接下来 就要隆重介绍调用图片的语句（使用时请将 # 换成空格）了</p>
 <pre><code class="bash">
+{%#asset_img#xxx.png#%}
 </code></pre>
-<p>  xxx 即为图片的名字 ，png即为图片的格式，如果图片格式文件为jpg，则相应的把png改成jpg<br>  此外，还要注意的是 ### 要注意空格<br>  {}内一共有三个空格，千万不能省略 </p>
+<p>  xxx 即为图片的名字 ，png即为图片的格式，如果图片格式文件为jpg，则相应的把png改成jpg<br>  此外，还要注意的是 </p>
+<h3 id="要注意空格"><a href="#要注意空格" class="headerlink" title="要注意空格"></a>要注意空格</h3><p>  {}内一共有三个空格，千万不能省略 </p>
 <h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>   将博客推送，你就会发现，你已经成功引用了本地的图片</p>
    <img src="/2017/12/13/关于在博客插入图片的简单教程/05.png">
 <p>  教程结束！<br>  晚安<br>  保佑我过四级。。。。</p>
@@ -108,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjb5bn93y00041wpwsznq2egv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjb5btc3z0005vwpwzqidgofr" class="article-share-link">Share</a>
       
       
     </footer>
