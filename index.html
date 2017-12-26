@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -87,12 +87,12 @@
 <p>群里就有大佬回答了这个问题：<br>有个好玩的函数的 叫getch（注意与getchar区分）</p>
 <h2 id="getch函数介绍如下"><a href="#getch函数介绍如下" class="headerlink" title="getch函数介绍如下"></a>getch函数介绍如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getch();</span><br><span class="line">头文件 ：conio.h</span><br><span class="line">函数用途：从控制台读取一个字符，但不显示在屏幕上</span><br><span class="line">函数原型：int getch(void)</span><br><span class="line">返回值：读取的字符</span><br></pre></td></tr></table></figure>
 <h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.在使用之前要调用initscr()，结束时要调用endwin()。否则会出现不输入字符这个函数<br>　　也会返回的情况。<br>2.在不同平台，输入回车，getch()将返回不同数值，而getchar()统一返回10(即\n)<br>（1)windows平台下ENTER键会产生两个转义字符 \r\n，因此getch返回13(\r)。<br>（2)unix、 linux系统中ENTER键只产生 \n ，因此getch返回10(\n)。<br>（3)MAC OS中ENTER键将产生 \r ，因此getch返回13(\r)。<br>3.getch();并非标准C中的函数，不存在C语言中。所以在使用的时候要注意程序的可移植性。</p>
-<h2 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;conio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	int d=0;</span><br><span class="line">	char password[18];</span><br><span class="line">	char ch;</span><br><span class="line">	<span class="keyword">while</span>((ch=_getch())!=<span class="string">'\r'</span>)&#123;//如果输入的不是回车 </span><br><span class="line">		<span class="keyword">if</span>(ch!=<span class="string">'\b'</span>)&#123;    //如果输入的不是退档键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"*"</span>);  //打印一个 * 代表输入一个字符 </span><br><span class="line">			password[d++]=ch;  //先把字符存在password[d]里，然后d++； </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;   // 如果输入的是退档键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\b"</span>); //将光标左移一格 </span><br><span class="line">			d--;   </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	puts(password);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;conio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	int d=0;</span><br><span class="line">	char password[18];</span><br><span class="line">	char ch;</span><br><span class="line">	<span class="keyword">while</span>((ch=_getch())!=<span class="string">'\r'</span>)&#123;//如果输入的不是回车 </span><br><span class="line">		<span class="keyword">if</span>(ch!=<span class="string">'\b'</span>)&#123;    //如果输入的不是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"*"</span>);  //打印一个 * 代表输入一个字符 </span><br><span class="line">			password[d++]=ch;  //先把字符存在password[d]里，然后d++； </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;   // 如果输入的是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\b \b"</span>); //将光标左移一格，用空格代替*，再左移一格 </span><br><span class="line">			d--;   </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	puts(password);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjbmigpxd00030kpwk20um72v" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjbn4bf1l0001lspwnjaou8r4" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -134,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjbmigpx800010kpwf7fotry0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjbn4bf250006lspwmh2l3aw7" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
@@ -187,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjbmigpxk00090kpw9rvztrf0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjbn4bf3m000clspwj4a8upi9" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -232,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjbmigpxe00040kpwrsbqkdb3" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjbn4bf3m000alspwzn49j0qm" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -272,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjbmigpx000000kpw8hqv9lbf" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjbn4bezl0000lspwhn6wc46c" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -312,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjbmigpxi00080kpwjo0dtk31" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjbn4bf3m0009lspwghvy4efm" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -351,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjbmigpxg00050kpws6k1i6cb" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjbn4bf3w000dlspwt5oa8w9i" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -371,7 +371,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
     </div>
@@ -381,7 +381,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/java-迷宫算法/" style="font-size: 10px;">java 迷宫算法</a>
     </div>
@@ -390,7 +390,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
     </div>
@@ -400,7 +400,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
@@ -437,7 +437,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
