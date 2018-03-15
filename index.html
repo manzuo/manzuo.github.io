@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -60,6 +60,135 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-C语言-qsort函数详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/15/C语言-qsort函数详解/" class="article-date">
+  <time datetime="2018-03-15T15:20:37.000Z" itemprop="datePublished">2018-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/C语言-qsort函数详解/">C语言 qsort函数详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  有一段时间，当需要对数组进行排序的时候，就不得不自己编写一个冒泡或者选择排序法，费时费力不说，排序效率也不高。<br>  其实，C语言为我们提供了一个实现了快速排序的函数qsort，对于较大型数组而言，“快速排序算法”是最有效的排序算法之一。</p>
+<h2 id="函数原型及说明"><a href="#函数原型及说明" class="headerlink" title="函数原型及说明"></a>函数原型及说明</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">函数原型： void qsort(void * base, size_t nmemb,size_t size ,int(*compar)(const void *,const void *))</span><br><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line">第1个参数是指针，指向待排序数组的首元素（可以引用任意类型的数组）</span><br><span class="line">第2个参数是待排序项的数量。（size_t 是sizeof运算符返回的整数类型）</span><br><span class="line">第3个参数是待排序数组中，每个元素的大小（所占字节数）</span><br><span class="line">第4个参数是一个函数指针，这个被指针指向的函数用与确定排序的顺序，该函数返回int型且接受两个指向const void的指针作为参数，这两个指针指向待比较项</span><br></pre></td></tr></table></figure>
+<h3 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/* 用qsort排序一组数据 */ </span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define NUM 40 //定义数组长度 </span></span><br><span class="line">void fillList(double* list,int n);</span><br><span class="line">void showList(double* list,int n);</span><br><span class="line">int mycompare(const void * p1,const void * p2);</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	double list[NUM];</span><br><span class="line">	fillList(list,NUM);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序前: \n"</span>);</span><br><span class="line">	showList(list,NUM);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序后:\n"</span>);</span><br><span class="line">	qsort(list,NUM,sizeof(double),mycompare);</span><br><span class="line">	showList(list,NUM);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">void fillList(double* list,int n)&#123; //用随机数填充数组 </span><br><span class="line">	<span class="keyword">for</span>(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		list[i]=(double) rand()/((double) rand()+0.1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void showList(double* list,int n)&#123; //打印数组 </span><br><span class="line">	<span class="keyword">for</span> (int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%9.4f"</span>,list[i]);</span><br><span class="line">		<span class="keyword">if</span>(i%6==5) <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">int mycompare(const void * p1,const void * p2)&#123; //需要自己编写的排序函数  作用是将数组按照升序排序 </span><br><span class="line">	double* a1=(double*) p1; </span><br><span class="line">	double* a2=(double*) p2; //将传入的void指针通过强制类型转换成待排序的数组的类型 </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(*a1&gt;*a2) <span class="built_in">return</span> 1; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(*a1&lt;*a2) <span class="built_in">return</span> -1;  </span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">return</span> 0;// 相等返回 0 </span><br><span class="line">&#125;</span><br><span class="line">//int mycompare(const void * p1,const void * p2)&#123;//作用是将数组按降序排序 </span><br><span class="line">//	double* a1=(double*) p1; </span><br><span class="line">//	double* a2=(double*) p2; //将传入的void指针通过强制类型转换成待排序的数组的类型 </span><br><span class="line">//	</span><br><span class="line">//	<span class="keyword">if</span>(*a1&gt;*a2) <span class="built_in">return</span> -1; </span><br><span class="line">//	<span class="keyword">else</span> <span class="keyword">if</span>(*a1&lt;*a2) <span class="built_in">return</span> 1;  </span><br><span class="line">//	<span class="keyword">else</span> <span class="built_in">return</span> 0;// 相等返回 0 </span><br><span class="line">//&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行效果图"><a href="#运行效果图" class="headerlink" title="运行效果图"></a>运行效果图</h2><img src="/2018/03/15/C语言-qsort函数详解/01.png">
+<h3 id="最后说明"><a href="#最后说明" class="headerlink" title="最后说明"></a>最后说明</h3><p>用于比较的函数需要自己编写，并需要能让qsort函数根据返回值进行排序。。<br>一般根据升序或降序的需要 根据大小关系返回 1 -1 0 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjespjrcc0001rkpwafywjd04" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-拓展任意类型数组长度的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/30/java-拓展任意类型数组长度的方法/" class="article-date">
+  <time datetime="2018-01-30T03:14:06.000Z" itemprop="datePublished">2018-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/java-拓展任意类型数组长度的方法/">java 拓展任意类型数组长度的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路一：使用泛型数组列表"><a href="#思路一：使用泛型数组列表" class="headerlink" title="思路一：使用泛型数组列表"></a>思路一：使用泛型数组列表</h2><p>在java里，有一个ArrayList的类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能</p>
+<h4 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法:"></a>声明方法:</h4><p>   ArrayList<object> staff =new ArrayList&lt;&gt;();<br>   &lt;&gt;里是具体的元素对象类型（但不能是像int double这样的基本类型）</object></p>
+<p>示例代码如下</p>
+<pre><code class="bash">package arrayList;
+import java.time.*;
+import java.util.*;
+
+public class ArrayListTest {
+    public static void main(String[] args) {
+        ArrayList&lt;Employee&gt; staff = new ArrayList&lt;&gt;();// 未定长度的数组
+        staff.add(new Employee(<span class="string">"Carl"</span>, 75000, 1987, 12, 15));
+        staff.add(new Employee(<span class="string">"Harry"</span>, 50000, 1989, 10, 1));
+        staff.add(new Employee(<span class="string">"Bob"</span>, 40000, 1990, 3, 15));
+
+        <span class="keyword">for</span>(Employee e : staff) {
+            System.out.println(e);
+        }
+        System.out.println(staff.get(1));// 访问staff里元素需要用get（）方法        
+    }
+
+
+    }    
+class Employee {
+    private String name;
+    private double salary;
+    private LocalDate hireDay;
+
+    public Employee(String name, double salary, int year, int month, int day) {
+        this.name = name;
+        this.salary = salary;
+        hireDay = LocalDate.of(year, month, day);
+
+    }
+    public String <span class="function"><span class="title">getName</span></span>() {
+        <span class="built_in">return</span> name;
+    }
+    public double <span class="function"><span class="title">getSalary</span></span>() {
+        <span class="built_in">return</span> salary;
+    }
+
+    public LocalDate <span class="function"><span class="title">getHireDay</span></span>() {
+        <span class="built_in">return</span> hireDay;
+    }
+    public String <span class="function"><span class="title">toString</span></span>() { //重写toString方法，便于对象的格式化打印
+        <span class="built_in">return</span> getClass().getName()+<span class="string">"[name="</span>+name+<span class="string">",salary"</span>+salary+<span class="string">",hirsDay"</span>+hireDay+<span class="string">"]"</span>;
+    }
+}
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjespjrd9000erkpwl1qfpk31" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-C语言模拟密码密码输入" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -92,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjbn4bf1l0001lspwnjaou8r4" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjespjrci0004rkpw5ysvtepp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -134,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjbn4bf250006lspwmh2l3aw7" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjespjrcg0003rkpw4aqufp0a" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
@@ -187,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjbn4bf3m000clspwj4a8upi9" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjespjrdc000hrkpwv7pjihx7" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -232,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjbn4bf3m000alspwzn49j0qm" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjespjrco0008rkpwbaifbvz2" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -272,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjbn4bezl0000lspwhn6wc46c" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjespjrc50000rkpwws2sw4an" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -312,7 +441,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjbn4bf3m0009lspwghvy4efm" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjespjrcj0005rkpw17l0am0b" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -351,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjbn4bf3w000dlspwt5oa8w9i" class="article-share-link">Delen</a>
+      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjespjrda000frkpwm9lhm6fa" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -371,9 +500,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
     </div>
   </div>
 
@@ -381,18 +510,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/java-迷宫算法/" style="font-size: 10px;">java 迷宫算法</a>
+      <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA-拓展数组/" style="font-size: 10px;">JAVA 拓展数组</a> <a href="/tags/java-迷宫算法/" style="font-size: 10px;">java 迷宫算法</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
     </div>
   </div>
 
@@ -400,9 +529,17 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/15/C语言-qsort函数详解/">C语言 qsort函数详解</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/30/java-拓展任意类型数组长度的方法/">java 拓展任意类型数组长度的方法</a>
+          </li>
         
           <li>
             <a href="/2017/12/26/C语言模拟密码密码输入/">C语言模拟密码密码输入</a>
@@ -414,14 +551,6 @@
         
           <li>
             <a href="/2017/12/13/关于在博客插入图片的简单教程/">关于在博客中插入图片的简单教程</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/13/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/11/C语言对汉字按拼音进行排序/">C语言对汉字按拼音进行排序</a>
           </li>
         
       </ul>
@@ -436,8 +565,8 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2018 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

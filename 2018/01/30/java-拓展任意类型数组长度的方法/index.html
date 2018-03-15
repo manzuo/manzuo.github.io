@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>NULL和0的区别 | Hexo</title>
+  <title>java 拓展任意类型数组长度的方法 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：   #include NULL 0  那问题来了，NULL和0什么区别呢？  查了资料发现有以下区别：（引用如下）   Q1：什么是 NULL？NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。   Q2:空指针（null o">
-<meta name="keywords" content="C">
+  <meta name="description" content="思路一：使用泛型数组列表在java里，有一个ArrayList的类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能 声明方法:   ArrayList staff =new ArrayList&amp;lt;&amp;gt;();   &amp;lt;&amp;gt;里是具体的元素对象类型（但不能是像int double这样的基本类型） 示例代码如下 package arrayList; import">
+<meta name="keywords" content="JAVA 拓展数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NULL和0的区别">
-<meta property="og:url" content="http://yoursite.com/2017/11/13/NULL和0的区别/index.html">
+<meta property="og:title" content="java 拓展任意类型数组长度的方法">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：   #include NULL 0  那问题来了，NULL和0什么区别呢？  查了资料发现有以下区别：（引用如下）   Q1：什么是 NULL？NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。   Q2:空指针（null o">
-<meta property="og:updated_time" content="2017-12-11T09:09:30.713Z">
+<meta property="og:description" content="思路一：使用泛型数组列表在java里，有一个ArrayList的类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能 声明方法:   ArrayList staff =new ArrayList&amp;lt;&amp;gt;();   &amp;lt;&amp;gt;里是具体的元素对象类型（但不能是像int double这样的基本类型） 示例代码如下 package arrayList; import">
+<meta property="og:updated_time" content="2018-01-30T03:48:21.265Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NULL和0的区别">
-<meta name="twitter:description" content="学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：   #include NULL 0  那问题来了，NULL和0什么区别呢？  查了资料发现有以下区别：（引用如下）   Q1：什么是 NULL？NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。   Q2:空指针（null o">
+<meta name="twitter:title" content="java 拓展任意类型数组长度的方法">
+<meta name="twitter:description" content="思路一：使用泛型数组列表在java里，有一个ArrayList的类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能 声明方法:   ArrayList staff =new ArrayList&amp;lt;&amp;gt;();   &amp;lt;&amp;gt;里是具体的元素对象类型（但不能是像int double这样的基本类型） 示例代码如下 package arrayList; import">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-NULL和0的区别" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-java-拓展任意类型数组长度的方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/13/NULL和0的区别/" class="article-date">
-  <time datetime="2017-11-13T13:58:34.000Z" itemprop="datePublished">2017-11-13</time>
+    <a href="/2018/01/30/java-拓展任意类型数组长度的方法/" class="article-date">
+  <time datetime="2018-01-30T03:14:06.000Z" itemprop="datePublished">2018-01-30</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      NULL和0的区别
+      java 拓展任意类型数组长度的方法
     </h1>
   
 
@@ -86,16 +86,62 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>  学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：</p>
-<p>  #include NULL 0<br>  那问题来了，NULL和0什么区别呢？<br>  查了资料发现有以下区别：（引用如下）<br>   Q1：什么是 NULL？<br>NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。<br>   Q2:空指针（null ointer）指向了内存的什么地方（空指针的内部实现）<br>标准并没有对空指针指向内存中的什么地方这一个问题作出规定，也就是说用哪个具体的地址值（0x0 地址还是某一特定地址）表示空指针取决于系统的实现。<br>我们常见的空指针一般指向0 地址，即空指针的内部用全0 来表示。<br>   注意：不要把空指针的内部表示等同于整数0 的对象表示——如上所述，有时它们是不同的。不含指针时两者可以等同</p>
+        <h2 id="思路一：使用泛型数组列表"><a href="#思路一：使用泛型数组列表" class="headerlink" title="思路一：使用泛型数组列表"></a>思路一：使用泛型数组列表</h2><p>在java里，有一个ArrayList的类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能</p>
+<h4 id="声明方法"><a href="#声明方法" class="headerlink" title="声明方法:"></a>声明方法:</h4><p>   ArrayList<object> staff =new ArrayList&lt;&gt;();<br>   &lt;&gt;里是具体的元素对象类型（但不能是像int double这样的基本类型）</object></p>
+<p>示例代码如下</p>
+<pre><code class="bash">package arrayList;
+import java.time.*;
+import java.util.*;
+
+public class ArrayListTest {
+    public static void main(String[] args) {
+        ArrayList&lt;Employee&gt; staff = new ArrayList&lt;&gt;();// 未定长度的数组
+        staff.add(new Employee(<span class="string">"Carl"</span>, 75000, 1987, 12, 15));
+        staff.add(new Employee(<span class="string">"Harry"</span>, 50000, 1989, 10, 1));
+        staff.add(new Employee(<span class="string">"Bob"</span>, 40000, 1990, 3, 15));
+
+        <span class="keyword">for</span>(Employee e : staff) {
+            System.out.println(e);
+        }
+        System.out.println(staff.get(1));// 访问staff里元素需要用get（）方法        
+    }
+
+
+    }    
+class Employee {
+    private String name;
+    private double salary;
+    private LocalDate hireDay;
+
+    public Employee(String name, double salary, int year, int month, int day) {
+        this.name = name;
+        this.salary = salary;
+        hireDay = LocalDate.of(year, month, day);
+
+    }
+    public String <span class="function"><span class="title">getName</span></span>() {
+        <span class="built_in">return</span> name;
+    }
+    public double <span class="function"><span class="title">getSalary</span></span>() {
+        <span class="built_in">return</span> salary;
+    }
+
+    public LocalDate <span class="function"><span class="title">getHireDay</span></span>() {
+        <span class="built_in">return</span> hireDay;
+    }
+    public String <span class="function"><span class="title">toString</span></span>() { //重写toString方法，便于对象的格式化打印
+        <span class="built_in">return</span> getClass().getName()+<span class="string">"[name="</span>+name+<span class="string">",salary"</span>+salary+<span class="string">",hirsDay"</span>+hireDay+<span class="string">"]"</span>;
+    }
+}
+</code></pre>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjespjrcj0005rkpw17l0am0b" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjespjrd9000erkpwl1qfpk31" class="article-share-link">Partager</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li></ul>
 
     </footer>
   </div>
@@ -103,19 +149,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/12/11/C语言对汉字按拼音进行排序/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/15/C语言-qsort函数详解/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
-          C语言对汉字按拼音进行排序
+          C语言 qsort函数详解
         
       </div>
     </a>
   
   
-    <a href="/2017/11/11/要哭/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/12/26/C语言模拟密码密码输入/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">要哭了为了搭这个博客</div>
+      <div class="article-nav-title">C语言模拟密码密码输入</div>
     </a>
   
 </nav>
