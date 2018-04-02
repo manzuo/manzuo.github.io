@@ -50,7 +50,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -85,14 +85,14 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在某些情况下，我们需要计算一些很大的数，比如求一个数的阶乘，这样的场景下，long 也不能胜任这样的大数的表示。<br>所幸，java为我们提供的强大且方便的大数类供我们使用。</p>
 <h2 id="BigInteger类介绍"><a href="#BigInteger类介绍" class="headerlink" title="BigInteger类介绍"></a>BigInteger类介绍</h2><h3 id="声明-amp-赋值方式"><a href="#声明-amp-赋值方式" class="headerlink" title="声明&amp;赋值方式"></a>声明&amp;赋值方式</h3><p>声明：BigInteger bi；<br>赋值：<br>1、 bi=BigInteger.valueOf(100);  //直接赋值法<br>2、 Scanner in= new Scanner(System.in);<br>    bi=in.nextBigInteger();     //从键盘读取<br>3、 bi=new BigInteger(“100”);    //调用构造方法，还有其他构造方法，请自行百度</p>
-<h3 id="三个常量"><a href="#三个常量" class="headerlink" title="三个常量"></a>三个常量</h3><p>BigInteger.ZRRO, BigInteger.ONE, BigInteger.TEN 分别对应 0，1,10 。</p>
+<h3 id="三个常量"><a href="#三个常量" class="headerlink" title="三个常量"></a>三个常量</h3><p>BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN 分别对应 0，1,10 。</p>
 <h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><p>BigInteger a,b;<br>add 两数相加：a.add(b) // 下列方法用法和加法类似<br>subtract 减<br>multiply 乘<br>divide   除<br>mod     取模<br>pow     乘方<br>equals  判断是否相等<br>compareTo 判断大小 a.compareTo(b) a&gt;b 返回1； a=b 返回0 ； a&lt;b 返回-1;</p>
 <h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>用大数类求任意整数的阶乘（用递归实现)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import java.math.BigInteger;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Fac &#123;</span><br><span class="line">    static BigInteger fac(BigInteger n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n.equals(BigInteger.ZERO)||n.equals(BigInteger.ONE)) <span class="built_in">return</span> BigInteger.ONE; // <span class="keyword">if</span>(n==1||n==0) <span class="built_in">return</span> 1;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">return</span> n.multiply(fac(n.subtract(BigInteger.ONE)));                       // <span class="keyword">else</span> <span class="built_in">return</span> n*fac(n-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        BigInteger n;</span><br><span class="line">        Scanner <span class="keyword">in</span> = new Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"输入整数："</span>);</span><br><span class="line">        n=in.nextBigInteger();</span><br><span class="line">        System.out.println(n+<span class="string">" 的阶乘为： "</span>+fac(n));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjfi63yev00007wpwwbeomz0m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjfi6758h0008qcpwbmyvpxfi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -135,7 +135,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjfi61e1g0004i8pwh9r6zm5m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjfi675870003qcpwv26a6yix" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -221,7 +221,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjfi61e1g0008i8pwehkrm98g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjfi6758h000aqcpwcd5c77iu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li></ul>
@@ -264,7 +264,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjfi61e160001i8pwxv6qrfgu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjfi675870001qcpwrejf0vrd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -306,7 +306,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjfi61e110000i8pwf1u29gq5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjfi6758h0005qcpwnwbpu0yc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
@@ -359,7 +359,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjfi61e1g0009i8pwrp53zqvl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjfi6758h000dqcpw3ot8k9g2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,7 +404,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjfi61e1g0005i8pwieuu4ydy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjfi67591000mqcpwd3qphseh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -444,7 +444,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjfi61e1g000bi8pwj9mpoc4f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjfi6757x0000qcpw67gdy6pl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -484,7 +484,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjfi61e160003i8pwkugzw6ty" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjfi6758h0004qcpw5jps70ei" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -523,7 +523,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjfi61e20000ji8pw4jnu63yu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/11/要哭/" data-id="cjfi6758r000eqcpwbm2duuon" class="article-share-link">Share</a>
       
       
     </footer>
@@ -562,7 +562,7 @@ class Employee {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
     </div>
@@ -572,7 +572,7 @@ class Employee {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
