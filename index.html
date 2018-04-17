@@ -61,6 +61,42 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言-栈的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/C语言-栈的实现/" class="article-date">
+  <time datetime="2018-04-17T06:32:21.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/17/C语言-栈的实现/">C语言 栈的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/C语言-栈的实现/" data-id="cjg3ajobp0004jwpwj7tyuy9z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言-const与指针" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/16/C语言-const与指针/" class="article-date">
@@ -85,7 +121,8 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>碰到个问题，就是<code>define pint int*</code>和<code>typedef int* pint</code>与const 一起使用时有什么区别呢</p>
 <h2 id="const与指针"><a href="#const与指针" class="headerlink" title="const与指针"></a>const与指针</h2><p><code>const</code>用法大家都知道，当const修饰一个变量时，该变量的值在初始化后是不能被更新的。<br>那么，当<code>const</code>修饰的变量是一个指针变量时，会发生什么呢？<br>这里，我先给大家一个结论或者说是定理：</p>
-<h1 id="在忽略变量类型修饰符（如int-double之类）之后，被const直接修饰的变量最终指向的内容不可变"><a href="#在忽略变量类型修饰符（如int-double之类）之后，被const直接修饰的变量最终指向的内容不可变" class="headerlink" title="在忽略变量类型修饰符（如int,double之类）之后，被const直接修饰的变量最终指向的内容不可变"></a>在忽略变量类型修饰符（如<code>int</code>,<code>double</code>之类）之后，被const直接修饰的变量最终指向的内容不可变</h1><pre><code>const int p;// 忽略int，const修饰p，p初始化后不可更改
+<p><strong>在忽略变量类型修饰符（如<code>int</code>,<code>double</code>之类）之后，被const直接修饰的变量最终指向的内容不可变</strong></p>
+<pre><code>const int p;// 忽略int，const修饰p，p初始化后不可更改
 const int* p;//忽略int，const修饰*p，不能通过*p更改p所指向的地址里的内容，但，可以更改p的指向（即可以p在初始化后可以指向其他int型的变量的地址）
 int const *p;//同上
 int* const p;//const修饰p，p初始化后指向地址不可更改，但可以通过*p更改p所指向的地址的内容
@@ -97,7 +134,7 @@ typedef int* pint;
 pint a,b;// a,b都是int* 型
 </code></pre><p>所以开始我们遇到的问题就很好解释，下面来看两段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pint int*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;<span class="comment">//简单文本替换，相当与 const int* p=&amp;a, const直接修饰*p</span></span><br><span class="line">	p=&amp;b;<span class="comment">//正确，p可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//错误，*p不可更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>* pint;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;</span><br><span class="line">	p=&amp;b;<span class="comment">//错误，p不可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//正确，*p可以更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>为什么出现相反结果呢，根据上面的给出的定理，我们很容易推出原因：第二段代码出现这样的结果#是因为const直接修饰指针p#</p>
+<p>为什么出现相反结果呢，根据上面的给出的定理，我们很容易推出原因：第二段代码出现这样的结果<strong>是因为const直接修饰指针p</strong></p>
 <pre><code>typedef int* pint;
 const pint p;//内部实现相当于 int* const p；
 
@@ -108,7 +145,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3ad20c0001mcpwl4k94jj9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3ajobb0000jwpwqqzmaxgg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -151,7 +188,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg3ad20q000amcpwci6rihoc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg3ajoc1000ejwpw1pgw0lxf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -194,7 +231,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg3ad2060000mcpwubfok5wj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg3ajobh0001jwpw89jhhhoz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -280,7 +317,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjg3ad20u000emcpw7alaqwz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjg3ajoc3000hjwpwbdtiyhb1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li></ul>
@@ -323,7 +360,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg3ad20h0003mcpwracvnqi0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg3ajobr0005jwpw8ll72bc0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -365,7 +402,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjg3ad20k0005mcpw0816tul3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjg3ajobu0008jwpwmlnya89r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
@@ -418,7 +455,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg3ad20v000hmcpw6k4dysc0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg3ajoc4000jjwpw3qwyc80m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -463,7 +500,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg3ad20o0008mcpwyygs195b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg3ajobx000ajwpwfxy48247" class="article-share-link">Share</a>
       
       
     </footer>
@@ -503,47 +540,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg3ad20j0004mcpwff3567lu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-NULL和0的区别" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/13/NULL和0的区别/" class="article-date">
-  <time datetime="2017-11-13T13:58:34.000Z" itemprop="datePublished">2017-11-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/13/NULL和0的区别/">NULL和0的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：</p>
-<p>  #include NULL 0<br>  那问题来了，NULL和0什么区别呢？<br>  查了资料发现有以下区别：（引用如下）<br>   Q1：什么是 NULL？<br>NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。<br>   Q2:空指针（null ointer）指向了内存的什么地方（空指针的内部实现）<br>标准并没有对空指针指向内存中的什么地方这一个问题作出规定，也就是说用哪个具体的地址值（0x0 地址还是某一特定地址）表示空指针取决于系统的实现。<br>我们常见的空指针一般指向0 地址，即空指针的内部用全0 来表示。<br>   注意：不要把空指针的内部表示等同于整数0 的对象表示——如上所述，有时它们是不同的。不含指针时两者可以等同</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjg3ad20s000dmcpw5b16ud0k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg3ajobm0003jwpw48g67h6w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -603,6 +600,10 @@ class Employee {
       <ul>
         
           <li>
+            <a href="/2018/04/17/C语言-栈的实现/">C语言 栈的实现</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/16/C语言-const与指针/">C语言 const与指针</a>
           </li>
         
@@ -616,10 +617,6 @@ class Employee {
         
           <li>
             <a href="/2018/01/30/java-拓展任意类型数组长度的方法/">java 拓展任意类型数组长度的方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/26/C语言模拟密码密码输入/">C语言模拟密码密码输入</a>
           </li>
         
       </ul>
