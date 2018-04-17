@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/16/C语言-const与指针/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言碰到个问题，就是define pint int*和typedef int* pint与const 一起使用时有什么区别呢 const与指针const用法大家都知道，当const修饰一个变量时，该变量的值在初始化后是不能被更新的。那么，当const修饰的变量是一个指针变量时，会发生什么呢？这里，我先给大家一个结论或者说是定理： 在忽略变量类型修饰符（如int,double之类）之后，被const">
-<meta property="og:updated_time" content="2018-04-17T06:25:13.077Z">
+<meta property="og:updated_time" content="2018-04-17T06:27:11.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言 const与指针">
 <meta name="twitter:description" content="前言碰到个问题，就是define pint int*和typedef int* pint与const 一起使用时有什么区别呢 const与指针const用法大家都知道，当const修饰一个变量时，该变量的值在初始化后是不能被更新的。那么，当const修饰的变量是一个指针变量时，会发生什么呢？这里，我先给大家一个结论或者说是定理： 在忽略变量类型修饰符（如int,double之类）之后，被const">
@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -98,7 +98,8 @@ pint a,b; // a是int*型，b是int型
 
 typedef int* pint;
 pint a,b;// a,b都是int* 型
-</code></pre><p>所以开始我们遇到的问题就很好解释，下面来看两段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pint int*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;<span class="comment">//简单文本替换，相当与 const int* p=&amp;a, const直接修饰*p</span></span><br><span class="line">	p=&amp;b;<span class="comment">//正确，p可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//错误，*p不可更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">第二段代码：</span><br><span class="line">``` c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>* pint;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;</span><br><span class="line">	p=&amp;b;<span class="comment">//错误，p不可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//正确，*p可以更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</code></pre><p>所以开始我们遇到的问题就很好解释，下面来看两段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pint int*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;<span class="comment">//简单文本替换，相当与 const int* p=&amp;a, const直接修饰*p</span></span><br><span class="line">	p=&amp;b;<span class="comment">//正确，p可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//错误，*p不可更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>* pint;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;</span><br><span class="line">	p=&amp;b;<span class="comment">//错误，p不可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//正确，*p可以更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>为什么出现相反结果呢，根据上面的给出的定理，我们很容易推出原因：第二段代码出现这样的结果#是因为const直接修饰指针p#</p>
 <pre><code>typedef int* pint;
 const pint p;//内部实现相当于 int* const p；
@@ -110,7 +111,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3aakqw0003qwpwkt67v50f" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3ad20c0001mcpwl4k94jj9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -123,7 +124,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   
   
     <a href="/2018/04/02/java-大数类的简单介绍及应用/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">java 大数类的简单介绍及应用</div>
     </a>
   
@@ -141,7 +142,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
     </div>
@@ -151,7 +152,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA-拓展数组/" style="font-size: 10px;">JAVA 拓展数组</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java-迷宫算法/" style="font-size: 10px;">java 迷宫算法</a>
     </div>
@@ -170,7 +171,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -207,7 +208,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
