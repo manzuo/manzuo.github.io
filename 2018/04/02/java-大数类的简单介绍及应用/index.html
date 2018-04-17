@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言在某些情况下，我们需要计算一些很大的数，比如求一个数的阶乘，这样的场景下，long 也不能胜任这样的大数的表示。所幸，java为我们提供的强大且方便的大数类供我们使用。 BigInteger类介绍声明&amp;amp;赋值方式声明：BigInteger bi；赋值：1、 bi=BigInteger.valueOf(100);  //直接赋值法2、 Scanner in= new Scanner(Sys">
-<meta property="og:updated_time" content="2018-04-02T11:47:28.123Z">
+<meta property="og:updated_time" content="2018-04-17T05:19:43.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 大数类的简单介绍及应用">
 <meta name="twitter:description" content="前言在某些情况下，我们需要计算一些很大的数，比如求一个数的阶乘，这样的场景下，long 也不能胜任这样的大数的表示。所幸，java为我们提供的强大且方便的大数类供我们使用。 BigInteger类介绍声明&amp;amp;赋值方式声明：BigInteger bi；赋值：1、 bi=BigInteger.valueOf(100);  //直接赋值法2、 Scanner in= new Scanner(Sys">
@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -90,12 +90,12 @@
 <h2 id="BigInteger类介绍"><a href="#BigInteger类介绍" class="headerlink" title="BigInteger类介绍"></a>BigInteger类介绍</h2><h3 id="声明-amp-赋值方式"><a href="#声明-amp-赋值方式" class="headerlink" title="声明&amp;赋值方式"></a>声明&amp;赋值方式</h3><p>声明：BigInteger bi；<br>赋值：<br>1、 bi=BigInteger.valueOf(100);  //直接赋值法<br>2、 Scanner in= new Scanner(System.in);<br>    bi=in.nextBigInteger();     //从键盘读取<br>3、 bi=new BigInteger(“100”);    //调用构造方法，还有其他构造方法，请自行百度</p>
 <h3 id="三个常量"><a href="#三个常量" class="headerlink" title="三个常量"></a>三个常量</h3><p>BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN 分别对应 0，1,10 。</p>
 <h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><p>BigInteger a,b;<br>add 两数相加：a.add(b) // 下列方法用法和加法类似<br>subtract 减<br>multiply 乘<br>divide   除<br>mod     取模<br>pow     乘方<br>equals  判断是否相等<br>compareTo 判断大小 a.compareTo(b) a&gt;b 返回1； a=b 返回0 ； a&lt;b 返回-1;</p>
-<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>用大数类求任意整数的阶乘（用递归实现)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import java.math.BigInteger;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Fac &#123;</span><br><span class="line">    static BigInteger fac(BigInteger n)&#123;</span><br><span class="line">        <span class="keyword">if</span>(n.equals(BigInteger.ZERO)||n.equals(BigInteger.ONE)) <span class="built_in">return</span> BigInteger.ONE; // <span class="keyword">if</span>(n==1||n==0) <span class="built_in">return</span> 1;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">return</span> n.multiply(fac(n.subtract(BigInteger.ONE)));                       // <span class="keyword">else</span> <span class="built_in">return</span> n*fac(n-1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        BigInteger n;</span><br><span class="line">        Scanner <span class="keyword">in</span> = new Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"输入整数："</span>);</span><br><span class="line">        n=in.nextBigInteger();</span><br><span class="line">        System.out.println(n+<span class="string">" 的阶乘为： "</span>+fac(n));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>用大数类求任意整数的阶乘（用递归实现)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fac</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> BigInteger <span class="title">fac</span><span class="params">(BigInteger n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n.equals(BigInteger.ZERO)||n.equals(BigInteger.ONE)) <span class="keyword">return</span> BigInteger.ONE; <span class="comment">// if(n==1||n==0) return 1;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> n.multiply(fac(n.subtract(BigInteger.ONE)));                       <span class="comment">// else return n*fac(n-1);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BigInteger n;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"输入整数："</span>);</span><br><span class="line">        n=in.nextBigInteger();</span><br><span class="line">        System.out.println(n+<span class="string">" 的阶乘为： "</span>+fac(n));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjfi6758h0008qcpwbmyvpxfi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg37ysec000asspw78zkdkdi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -105,6 +105,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/04/16/C语言-const与指针/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          C语言 const与指针
+        
+      </div>
+    </a>
   
   
     <a href="/2018/03/15/C语言-qsort函数详解/" id="article-nav-older" class="article-nav-link-wrap">
@@ -145,7 +154,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
     </div>
@@ -155,9 +164,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/04/16/C语言-const与指针/">C语言 const与指针</a>
+          </li>
         
           <li>
             <a href="/2018/04/02/java-大数类的简单介绍及应用/">java 大数类的简单介绍及应用</a>
@@ -173,10 +186,6 @@
         
           <li>
             <a href="/2017/12/26/C语言模拟密码密码输入/">C语言模拟密码密码输入</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/17/JAVA-用递归实现迷宫算法/">JAVA:用递归实现迷宫算法</a>
           </li>
         
       </ul>
