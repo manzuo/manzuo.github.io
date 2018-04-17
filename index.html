@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -85,8 +85,7 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>碰到个问题，就是<code>define pint int*</code>和<code>typedef int* pint</code>与const 一起使用时有什么区别呢</p>
 <h2 id="const与指针"><a href="#const与指针" class="headerlink" title="const与指针"></a>const与指针</h2><p><code>const</code>用法大家都知道，当const修饰一个变量时，该变量的值在初始化后是不能被更新的。<br>那么，当<code>const</code>修饰的变量是一个指针变量时，会发生什么呢？<br>这里，我先给大家一个结论或者说是定理：</p>
-<p>#在忽略变量类型修饰符（如<code>int</code>,<code>double</code>之类）之后，被const直接修饰的变量最终指向的内容不可变#</p>
-<pre><code>const int p;// 忽略int，const修饰p，p初始化后不可更改
+<h1 id="在忽略变量类型修饰符（如int-double之类）之后，被const直接修饰的变量最终指向的内容不可变"><a href="#在忽略变量类型修饰符（如int-double之类）之后，被const直接修饰的变量最终指向的内容不可变" class="headerlink" title="在忽略变量类型修饰符（如int,double之类）之后，被const直接修饰的变量最终指向的内容不可变"></a>在忽略变量类型修饰符（如<code>int</code>,<code>double</code>之类）之后，被const直接修饰的变量最终指向的内容不可变</h1><pre><code>const int p;// 忽略int，const修饰p，p初始化后不可更改
 const int* p;//忽略int，const修饰*p，不能通过*p更改p所指向的地址里的内容，但，可以更改p的指向（即可以p在初始化后可以指向其他int型的变量的地址）
 int const *p;//同上
 int* const p;//const修饰p，p初始化后指向地址不可更改，但可以通过*p更改p所指向的地址的内容
@@ -96,7 +95,7 @@ pint a,b; // a是int*型，b是int型
 
 typedef int* pint;
 pint a,b;// a,b都是int* 型
-</code></pre><p>所以开始我们遇到的问题就很好解释，下面来看两段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pint int*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;<span class="comment">//简单文本替换，相当与 const int* p=&amp;a, const直接修饰*p</span></span><br><span class="line">	p=&amp;b;<span class="comment">//正确，p可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//错误，*p不可更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">``` c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>* pint;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;</span><br><span class="line">	p=&amp;b;<span class="comment">//错误，p不可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//正确，*p可以更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</code></pre><p>所以开始我们遇到的问题就很好解释，下面来看两段代码：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pint int*</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;<span class="comment">//简单文本替换，相当与 const int* p=&amp;a, const直接修饰*p</span></span><br><span class="line">	p=&amp;b;<span class="comment">//正确，p可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//错误，*p不可更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line">第二段代码：</span><br><span class="line">``` c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a=<span class="number">3</span>,b=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">int</span>* pint;</span><br><span class="line">	<span class="keyword">const</span> pint p=&amp;a;</span><br><span class="line">	p=&amp;b;<span class="comment">//错误，p不可以更改</span></span><br><span class="line">	*p=<span class="number">5</span>;<span class="comment">//正确，*p可以更改</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>为什么出现相反结果呢，根据上面的给出的定理，我们很容易推出原因：第二段代码出现这样的结果#是因为const直接修饰指针p#</p>
 <pre><code>typedef int* pint;
 const pint p;//内部实现相当于 int* const p；
@@ -108,7 +107,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3a60tn0001h8pw1t5nswgd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg3aakqw0003qwpwkt67v50f" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -151,7 +150,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg3a60un000mh8pwioa5alio" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg3aakr5000aqwpwudp7r41d" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -194,7 +193,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg3a60ts0003h8pw9uvd0783" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg3aakqk0000qwpwi6op6lfo" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -280,7 +279,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjg3a60u5000fh8pwt5bgbfiw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展任意类型数组长度的方法/" data-id="cjg3aakr8000dqwpwn4kkjsuo" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li></ul>
@@ -323,7 +322,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg3a60tu0004h8pwxzoe5tie" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg3aakqy0004qwpw99bhm5t3" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -365,7 +364,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjg3a60tw0005h8pwjl9l2kiw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjg3aakr00005qwpwg8of56y7" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
@@ -418,7 +417,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg3a60u4000dh8pw0n3wixfr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg3aakr9000fqwpw8klcit3m" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -463,7 +462,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg3a60u1000ah8pwxec3qt3w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg3aakrc000jqwpwup1i2wnx" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -503,7 +502,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg3a60ti0000h8pwjc8e2kwm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg3aakqr0001qwpw3p4gbkmp" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -543,7 +542,7 @@ class Employee {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjg3a60tz0008h8pwinv9az6n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/NULL和0的区别/" data-id="cjg3aakr30008qwpwg6yzr1yg" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -569,7 +568,7 @@ class Employee {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA-拓展数组/">JAVA 拓展数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java-迷宫算法/">java 迷宫算法</a></li></ul>
     </div>
@@ -579,7 +578,7 @@ class Employee {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA-拓展数组/" style="font-size: 10px;">JAVA 拓展数组</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java-迷宫算法/" style="font-size: 10px;">java 迷宫算法</a>
     </div>
@@ -598,7 +597,7 @@ class Employee {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -635,7 +634,7 @@ class Employee {
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
