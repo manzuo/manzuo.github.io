@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/30/java-拓展数组长度的方法/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前言数组是我们编程常用到的一种最简单的数据结构，操作简单，功能强大。但是也是一个缺点，就是一旦创建了数组，就不能改变它的大小。如果申请一个超大的内存空间，又容易造成空间浪费，那有什么办法可以克服这个缺点呢？ 思路一：数组拷贝在java里，允许将一个数组变量拷贝给另一个数值变量。此时，两个变量将引用同一个数组 。如：123intint[]a=new int[4];int[]b=a;a[1]=4;//">
-<meta property="og:updated_time" content="2018-04-18T17:37:29.574Z">
+<meta property="og:updated_time" content="2018-04-19T08:54:10.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 拓展数组长度的方法">
 <meta name="twitter:description" content="前言数组是我们编程常用到的一种最简单的数据结构，操作简单，功能强大。但是也是一个缺点，就是一旦创建了数组，就不能改变它的大小。如果申请一个超大的内存空间，又容易造成空间浪费，那有什么办法可以克服这个缺点呢？ 思路一：数组拷贝在java里，允许将一个数组变量拷贝给另一个数值变量。此时，两个变量将引用同一个数组 。如：123intint[]a=new int[4];int[]b=a;a[1]=4;//">
@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -96,10 +96,11 @@
 </code></pre><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>1、&lt;&gt;里是具体的元素对象类型，可以是自定义的类型（自己编写的类），也可以String类型，但不能是像int double这样的基本类型，必须使用基本类型对应的对象包装器（如Integer，Double）<br>    ArrayList<int> staff =new ArrayList<int>();//错误<br>    ArrayList<integer> staff =new ArrayList<integer>();//正确<br>2，有几种声明方法：<br>    ArrayList<string> staff =new ArrayList<string>();<br>    ArrayList<string> staff =new ArrayList&lt;&gt;();//和上面等价。java SE7中，可以省去右边的类型参数，编译器会正确推断出正确的类型参数</string></string></string></integer></integer></int></int></p>
 <pre><code>ArrayList&lt;String&gt; staff =new ArrayList&lt;&gt;(100);//将构造一个初始容量为100的数组列表，但这并不是最终容纳量
                                               //数组列表满了后，会自动重新分配空间，之后容量将超过100
-</code></pre><h3 id="数组列表的操作方法"><a href="#数组列表的操作方法" class="headerlink" title="数组列表的操作方法"></a>数组列表的操作方法</h3><p>天下没有免费的午餐，自动扩容的数组列表操作时比数组复杂一点，不能方便的访问数组元素</p>
+</code></pre><h3 id="数组列表的操作方法"><a href="#数组列表的操作方法" class="headerlink" title="数组列表的操作方法"></a>数组列表的操作方法</h3><p>天下没有免费的午餐，自动扩容的数组列表操作时虽然不用担心容量问题，但操作元素要比数组复杂一点，不能方便的访问数组元素</p>
 <pre><code>boolean add(E obj) //在尾部添加元素，永远返回true
-boolean set(int index,E obj) // 在指定位置插入元素，该位置之后的元素都向后移动一个位置，数组大小加一
+boolean add(int index,E obj) // 在指定位置插入元素，该位置之后的元素都向后移动一个位置，数组大小加一
 boolean remove(int i) // 删除指定位置的元素，该位置之后的元素都向前移动一个位置，数组大小减一
+boolean set(int index,E obj) // 用新元素覆盖（代替）指定位置的元素
 E get(int i) // 返回指定位置的元素
 int size() // 返回存储在数组列表的当前元素数量
 void trimToSize() // 将数组的存储容量削减到当前尺寸
@@ -157,7 +158,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/30/java-拓展数组长度的方法/" data-id="cjg5dr3z5000fxspw6tj7r344" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展数组长度的方法/" data-id="cjg6ai0br000eggpwlbdukxfn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
@@ -169,7 +170,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
 <nav id="article-nav">
   
     <a href="/2018/03/15/C语言-qsort函数详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           C语言 qsort函数详解
@@ -179,7 +180,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
   
     <a href="/2017/12/26/C语言模拟密码密码输入/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">C语言模拟密码密码输入</div>
     </a>
   
@@ -197,7 +198,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
     </div>
@@ -207,7 +208,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/java/" style="font-size: 15px;">java</a>
     </div>
@@ -226,7 +227,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -263,7 +264,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

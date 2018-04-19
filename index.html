@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -87,7 +87,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/17/C语言-栈的实现/" data-id="cjg5dr3yv0005xspwjdo0wa55" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/17/C语言-栈的实现/" data-id="cjg6ai0bh0003ggpwvurn2516" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -147,7 +147,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg5dr3yl0000xspwr1tfjd2t" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/16/C语言-const与指针/" data-id="cjg6ai0ax0000ggpwbaydq583" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -190,7 +190,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg5dr3z5000dxspw0agvdp8b" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/04/02/java-大数类的简单介绍及应用/" data-id="cjg6ai0bh000aggpw8nzrns8y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -233,7 +233,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg5dr3yl0001xspwnhnhgap9" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/03/15/C语言-qsort函数详解/" data-id="cjg6ai0bh0006ggpwvq7utdl4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -277,10 +277,11 @@ const pint p;//简单文本替换，相当于 const int* p;
 </code></pre><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>1、&lt;&gt;里是具体的元素对象类型，可以是自定义的类型（自己编写的类），也可以String类型，但不能是像int double这样的基本类型，必须使用基本类型对应的对象包装器（如Integer，Double）<br>    ArrayList<int> staff =new ArrayList<int>();//错误<br>    ArrayList<integer> staff =new ArrayList<integer>();//正确<br>2，有几种声明方法：<br>    ArrayList<string> staff =new ArrayList<string>();<br>    ArrayList<string> staff =new ArrayList&lt;&gt;();//和上面等价。java SE7中，可以省去右边的类型参数，编译器会正确推断出正确的类型参数</string></string></string></integer></integer></int></int></p>
 <pre><code>ArrayList&lt;String&gt; staff =new ArrayList&lt;&gt;(100);//将构造一个初始容量为100的数组列表，但这并不是最终容纳量
                                               //数组列表满了后，会自动重新分配空间，之后容量将超过100
-</code></pre><h3 id="数组列表的操作方法"><a href="#数组列表的操作方法" class="headerlink" title="数组列表的操作方法"></a>数组列表的操作方法</h3><p>天下没有免费的午餐，自动扩容的数组列表操作时比数组复杂一点，不能方便的访问数组元素</p>
+</code></pre><h3 id="数组列表的操作方法"><a href="#数组列表的操作方法" class="headerlink" title="数组列表的操作方法"></a>数组列表的操作方法</h3><p>天下没有免费的午餐，自动扩容的数组列表操作时虽然不用担心容量问题，但操作元素要比数组复杂一点，不能方便的访问数组元素</p>
 <pre><code>boolean add(E obj) //在尾部添加元素，永远返回true
-boolean set(int index,E obj) // 在指定位置插入元素，该位置之后的元素都向后移动一个位置，数组大小加一
+boolean add(int index,E obj) // 在指定位置插入元素，该位置之后的元素都向后移动一个位置，数组大小加一
 boolean remove(int i) // 删除指定位置的元素，该位置之后的元素都向前移动一个位置，数组大小减一
+boolean set(int index,E obj) // 用新元素覆盖（代替）指定位置的元素
 E get(int i) // 返回指定位置的元素
 int size() // 返回存储在数组列表的当前元素数量
 void trimToSize() // 将数组的存储容量削减到当前尺寸
@@ -338,7 +339,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/30/java-拓展数组长度的方法/" data-id="cjg5dr3z5000fxspw6tj7r344" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2018/01/30/java-拓展数组长度的方法/" data-id="cjg6ai0br000eggpwlbdukxfn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/">JAVA</a></li></ul>
@@ -381,7 +382,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg5dr3yv0004xspwvn3c9edg" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg6ai0cb000mggpwsm8snbcx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -393,9 +394,9 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
 
 
   
-    <article id="post-JAVA-用递归实现迷宫算法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-用递归实现迷宫算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/17/JAVA-用递归实现迷宫算法/" class="article-date">
+    <a href="/2017/12/17/java-用递归实现迷宫算法/" class="article-date">
   <time datetime="2017-12-16T16:38:00.000Z" itemprop="datePublished">2017-12-17</time>
 </a>
     
@@ -407,7 +408,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/17/JAVA-用递归实现迷宫算法/">JAVA:用递归实现迷宫算法</a>
+      <a class="article-title" href="/2017/12/17/java-用递归实现迷宫算法/">java-用递归实现迷宫算法&#39;</a>
     </h1>
   
 
@@ -417,13 +418,13 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
         <p>话不多说，上代码：</p>
 <h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;    </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> length,wideth;<span class="comment">//迷宫矩阵的长度和宽度  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x,y;<span class="comment">//起始位置的坐标  </span></span><br><span class="line">    <span class="keyword">static</span> String[][] arr;<span class="comment">//迷宫的二维数组  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> n;<span class="comment">//当前走的走的步数，初始值设置为10000意为无穷  </span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Scanner in;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </span><br><span class="line">    	in = <span class="keyword">new</span> Scanner (System.in);</span><br><span class="line">    	System.out.println(<span class="string">"输入迷宫的长度、宽度(行数和列数不超过50）"</span>);</span><br><span class="line">    	wideth =in.nextInt();</span><br><span class="line">    	length =in.nextInt();  <span class="comment">//让用户输入迷宫的宽度和长度</span></span><br><span class="line">    	arr = <span class="keyword">new</span> String[wideth][length];</span><br><span class="line">    	System.out.println(<span class="string">"请输入"</span>+wideth+<span class="string">"行"</span>+length+<span class="string">"列的迷宫 ('0'表示墙，'1' 表示道路 '4'表示起点 '5'表示终点 )"</span>);</span><br><span class="line"><span class="comment">//从键盘读取迷宫</span></span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;</span><br><span class="line">				arr[i][j] = in.next();</span><br><span class="line">		      &#125;</span><br><span class="line">			   &#125;</span><br><span class="line"><span class="comment">//遍历一次迷宫，找到起点，记下起点的坐标    </span></span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;	</span><br><span class="line">				<span class="keyword">if</span> (arr[i][j].equals(<span class="string">"4"</span>)) &#123;</span><br><span class="line">					x=i;</span><br><span class="line">					y=j;</span><br><span class="line">                &#125;</span><br><span class="line">		     &#125;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//开始尝试找出口</span></span><br><span class="line"><span class="keyword">try</span> &#123;	</span><br><span class="line">		Running(x,y,n);</span><br><span class="line">		</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"><span class="comment">//接收异常，打印数组</span></span><br><span class="line">	     System.out.println();</span><br><span class="line">	     System.out.println(<span class="string">"找到出口！路径如下(*代表路径)："</span>);</span><br><span class="line">	     <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;	</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;	</span><br><span class="line">				System.out.print(arr[i][j]);</span><br><span class="line">					<span class="keyword">if</span>(j==length-<span class="number">1</span>) </span><br><span class="line">						 System.out.println();</span><br><span class="line">					<span class="keyword">else</span> System.out.print(<span class="string">" "</span>);</span><br><span class="line">					&#125;</span><br><span class="line">		      &#125;</span><br><span class="line">	     </span><br><span class="line">            System.exit(<span class="number">0</span>); <span class="comment">//结束程序</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//如果程序正常退出，说明迷宫没有出口</span></span><br><span class="line">         System.out.println(<span class="string">"该迷宫没有出口！！！"</span>);</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*找出口的递归函数*/</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Running</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> n)</span></span>&#123;  </span><br><span class="line">     </span><br><span class="line"><span class="comment">//	 System.out.println(x+" "+y+" "+n);//打印每一步方便理解</span></span><br><span class="line">	 </span><br><span class="line"> </span><br><span class="line"> 		<span class="keyword">if</span>(arr[x][y].equals(<span class="string">"5"</span>)||n==<span class="number">10000</span>)&#123; </span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>; <span class="comment">//当找到出口'5'时，抛出异常，跳出整个递归函数   </span></span><br><span class="line">        &#125; </span><br><span class="line"> 		<span class="keyword">if</span>(!arr[x][y].equals(<span class="string">"4"</span>)) <span class="comment">//若非起点和终点，将该点做个记号"*"表示已经走过</span></span><br><span class="line"> 			arr[x][y]=<span class="string">"*"</span>;</span><br><span class="line"> 		  </span><br><span class="line"><span class="comment">/*判断上下左右有没有终点*/</span></span><br><span class="line">        <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x][y-<span class="number">1</span>].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line"><span class="comment">/*如果没有终点，则看上下左右有没有道路*/</span>  </span><br><span class="line">        <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  <span class="comment">//向下</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  <span class="comment">//向右</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;(arr[x][y-<span class="number">1</span>].equals(<span class="string">"1"</span>)))&#123;  </span><br><span class="line">            Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  <span class="comment">//向左</span></span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  <span class="comment">//向上</span></span><br><span class="line">        &#125;   </span><br><span class="line"></span><br><span class="line">         arr[x][y]=<span class="string">"#"</span>; <span class="comment">//如果没有道路,说明是死胡同，将改点标记为“#”</span></span><br><span class="line"><span class="comment">/* 再看上下左右有没有之前走过的路并返回之前走过的路*/</span></span><br><span class="line">         <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;(arr[x][y-<span class="number">1</span>].equals(<span class="string">"*"</span>)))&#123;  </span><br><span class="line">             Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line"> <span class="comment">/*     如果上诉条件都不满足，说明该方向的道路是死路，该层递归结束，返回上一层递归 </span></span><br><span class="line"><span class="comment">       以此类推，直到返回第一层递归，继续找其他方向的路。</span></span><br><span class="line"><span class="comment">       在第一层递归中，如果上述条件都不满足，说明迷宫没有出口</span></span><br><span class="line"><span class="comment">       程序正常退出，不会抛出异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">         &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="运行效果图："><a href="#运行效果图：" class="headerlink" title="运行效果图："></a>运行效果图：</h2><img src="/2017/12/17/JAVA-用递归实现迷宫算法/01.png">  
-<img src="/2017/12/17/JAVA-用递归实现迷宫算法/02.png"> 
+<h2 id="运行效果图："><a href="#运行效果图：" class="headerlink" title="运行效果图："></a>运行效果图：</h2><img src="/2017/12/17/java-用递归实现迷宫算法/01.png">  
+<img src="/2017/12/17/java-用递归实现迷宫算法/02.png"> 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/17/JAVA-用递归实现迷宫算法/" data-id="cjg5dr3yv0008xspw4qy5svi0" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/17/java-用递归实现迷宫算法/" data-id="cjg6ai0br000gggpwe7x9qbrt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
@@ -476,7 +477,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg5dr3z5000jxspw91uwj2lg" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/13/关于在博客插入图片的简单教程/" data-id="cjg6ai0c1000lggpwcn6uvl42" class="article-share-link">Share</a>
       
       
     </footer>
@@ -521,7 +522,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg5dr3yv000axspw57ud7ghf" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/13/hello-world/" data-id="cjg6ai0br000cggpw7bb7z93k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,7 +562,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg5dr3yv0003xspwt9p1zdw5" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2017/12/11/C语言对汉字按拼音进行排序/" data-id="cjg6ai0bh0004ggpwt52i6yli" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -587,7 +588,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
     </div>
@@ -597,7 +598,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/java/" style="font-size: 15px;">java</a>
     </div>
@@ -616,7 +617,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -653,7 +654,7 @@ void trimToSize() // 将数组的存储容量削减到当前尺寸
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2018 John Doe<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
