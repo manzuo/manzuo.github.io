@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C语言模拟密码密码输入 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天碰到个很有趣的问题：怎么用C语言怎么实现类似密码输入的效果？（输入一个字符时用*号表示） 群里就有大佬回答了这个问题：有个好玩的函数的 叫getch（注意与getchar区分） getch函数介绍如下12345getch();头文件 ：conio.h函数用途：从控制台读取一个字符，但不显示在屏幕上函数原型：int getch(void)返回值：读取的字符 注意：1.在使用之前要调用ini">
+<meta name="keywords" content="C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言模拟密码密码输入">
+<meta property="og:url" content="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天碰到个很有趣的问题：怎么用C语言怎么实现类似密码输入的效果？（输入一个字符时用*号表示） 群里就有大佬回答了这个问题：有个好玩的函数的 叫getch（注意与getchar区分） getch函数介绍如下12345getch();头文件 ：conio.h函数用途：从控制台读取一个字符，但不显示在屏幕上函数原型：int getch(void)返回值：读取的字符 注意：1.在使用之前要调用ini">
+<meta property="og:updated_time" content="2017-12-26T04:14:31.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言模拟密码密码输入">
+<meta name="twitter:description" content="今天碰到个很有趣的问题：怎么用C语言怎么实现类似密码输入的效果？（输入一个字符时用*号表示） 群里就有大佬回答了这个问题：有个好玩的函数的 叫getch（注意与getchar区分） getch函数介绍如下12345getch();头文件 ：conio.h函数用途：从控制台读取一个字符，但不显示在屏幕上函数原型：int getch(void)返回值：读取的字符 注意：1.在使用之前要调用ini">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C语言模拟密码密码输入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/26/C语言模拟密码密码输入/" class="article-date">
+  <time datetime="2017-12-25T17:43:16.000Z" itemprop="datePublished">2017-12-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C语言模拟密码密码输入
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   今天碰到个很有趣的问题：<br>怎么用C语言怎么实现类似密码输入的效果？（输入一个字符时用*号表示）</p>
+<p>群里就有大佬回答了这个问题：<br>有个好玩的函数的 叫getch（注意与getchar区分）</p>
+<h2 id="getch函数介绍如下"><a href="#getch函数介绍如下" class="headerlink" title="getch函数介绍如下"></a>getch函数介绍如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getch();</span><br><span class="line">头文件 ：conio.h</span><br><span class="line">函数用途：从控制台读取一个字符，但不显示在屏幕上</span><br><span class="line">函数原型：int getch(void)</span><br><span class="line">返回值：读取的字符</span><br></pre></td></tr></table></figure>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.在使用之前要调用initscr()，结束时要调用endwin()。否则会出现不输入字符这个函数<br>　　也会返回的情况。<br>2.在不同平台，输入回车，getch()将返回不同数值，而getchar()统一返回10(即\n)<br>（1)windows平台下ENTER键会产生两个转义字符 \r\n，因此getch返回13(\r)。<br>（2)unix、 linux系统中ENTER键只产生 \n ，因此getch返回10(\n)。<br>（3)MAC OS中ENTER键将产生 \r ，因此getch返回13(\r)。<br>3.getch();并非标准C中的函数，不存在C语言中。所以在使用的时候要注意程序的可移植性。</p>
+<h2 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;conio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	int d=0;</span><br><span class="line">	char password[18];</span><br><span class="line">	char ch;</span><br><span class="line">	<span class="keyword">while</span>((ch=_getch())!=<span class="string">'\r'</span>)&#123;//如果输入的不是回车 </span><br><span class="line">		<span class="keyword">if</span>(ch!=<span class="string">'\b'</span>)&#123;    //如果输入的不是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"*"</span>);  //打印一个 * 代表输入一个字符 </span><br><span class="line">			password[d++]=ch;  //先把字符存在password[d]里，然后d++； </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;   // 如果输入的是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\b \b"</span>); //将光标左移一格，用空格代替*，再左移一格 </span><br><span class="line">			d--;   </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	puts(password);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/26/C语言模拟密码密码输入/" data-id="cjg7a38430003wgpw8dbesk7d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/30/java-拓展数组长度的方法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          java 拓展数组长度的方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/17/java-用递归实现迷宫算法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">java-用递归实现迷宫算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAVA/">JAVA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/JAVA/" style="font-size: 10px;">JAVA</a> <a href="/tags/java/" style="font-size: 15px;">java</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/04/20/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/17/C语言-栈的实现/">C语言 栈的实现</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/C语言-const与指针/">C语言 const与指针</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/02/java-大数类的简单介绍及应用/">java 大数类的简单介绍及应用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/15/C语言-qsort函数详解/">C语言 qsort函数详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
