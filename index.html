@@ -61,6 +61,454 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C语言-对汉字按拼音进行排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/C语言-对汉字按拼音进行排序/" class="article-date">
+  <time datetime="2018-04-21T04:23:49.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/C语言-对汉字按拼音进行排序/">C语言 对汉字按拼音进行排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于笔者最近要用C语言写一个简单（粗糙）的学生成绩管理系统，所以遇到一个问题：<br>   需要按照学生的姓名将学生排序！<br>   问题的难点是学生的名字是中文汉字的，该怎么比较大小呢？<br>   经过一番度娘，笔者发现了一个神奇的strcoll函数：</p>
+<h2 id="函数声明："><a href="#函数声明：" class="headerlink" title="函数声明："></a>函数声明：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int strcoll(const char *str1, const char *str2)</span><br></pre></td></tr></table></figure>
+<h2 id="参数："><a href="#参数：" class="headerlink" title="参数："></a>参数：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str1 -- 这是第一个要比较的字符串。</span><br><span class="line"></span><br><span class="line">str2 -- 这是第二个进行比较的字符串。</span><br></pre></td></tr></table></figure>
+<h2 id="返回值："><a href="#返回值：" class="headerlink" title="返回值："></a>返回值：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">如果返回值&lt;0，则表明str1小于str2（如 <span class="string">"李"</span>（li）&lt;<span class="string">"张"</span>（zhang））</span><br><span class="line"></span><br><span class="line">如果返回值，如果&gt; 0，则表明str2 小于 str1 </span><br><span class="line"></span><br><span class="line">如果返回值= 0，则表明str1 等于str2  （在尝试的时候 笔者发现： 如果两个名字对应的拼音都一样，</span><br><span class="line">                                		但字不一样时返回值不为0，但除拼音外的判断条件笔者也没研究出来）</span><br></pre></td></tr></table></figure>
+<h2 id="下面是一个应用的例子："><a href="#下面是一个应用的例子：" class="headerlink" title="下面是一个应用的例子："></a>下面是一个应用的例子：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;string.h&gt;</span></span><br><span class="line">struct student&#123;</span><br><span class="line">	char name[10];</span><br><span class="line">&#125; stu[42]; //声明结构体数组</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	int n;</span><br><span class="line">	struct student s;</span><br><span class="line">      scanf(<span class="string">"%d"</span>,&amp;n);//判断人数</span><br><span class="line">      <span class="keyword">for</span> (int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">      	scanf(<span class="string">"%s"</span>,stu[i].name);//从键盘读取学生名字</span><br><span class="line">	  &#125;</span><br><span class="line">	  <span class="keyword">for</span> (int i=1;i&lt;=n-1;i++)&#123;</span><br><span class="line">	  	<span class="keyword">for</span>(int j=1;j&lt;=n-i;j++)&#123;</span><br><span class="line">	  		<span class="keyword">if</span>(strcoll(stu[j].name,stu[j+1].name)&gt;=0)&#123; //按拼音从<span class="string">"a"</span>到<span class="string">"z"</span>排序</span><br><span class="line">	  			s=stu[j];</span><br><span class="line">	  			stu[j]=stu[j+1];</span><br><span class="line">	  			stu[j+1]=s;</span><br><span class="line">			  &#125;</span><br><span class="line">		  &#125;</span><br><span class="line">	  &#125;</span><br><span class="line">	  <span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">	  <span class="keyword">for</span>(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">	  	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>,stu[i].name);//输出</span><br><span class="line">	  &#125;</span><br><span class="line">	 <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/C语言-对汉字按拼音进行排序/" data-id="cjg8vymc50003hspwhgg1os4u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言-NULL和0的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/C语言-NULL和0的区别/" class="article-date">
+  <time datetime="2018-04-21T04:20:13.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/C语言-NULL和0的区别/">C语言 NULL和0的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  学了指针，接触到了一个“NULL”；NUll在预处理命令中这样定义：</p>
+<p>  #include NULL 0<br>  那问题来了，NULL和0什么区别呢？<br>  查了资料发现有以下区别：（引用如下）<br>   Q1：什么是 NULL？<br>NULL 是一个标准规定的宏定义，用来表示空指针常量。由系统保证空指针不指向任何实际的对象或者函数。反过来说，任何对象或者函数的地址都不可能是空指针。<br>   Q2:空指针（null ointer）指向了内存的什么地方（空指针的内部实现）<br>标准并没有对空指针指向内存中的什么地方这一个问题作出规定，也就是说用哪个具体的地址值（0x0 地址还是某一特定地址）表示空指针取决于系统的实现。<br>我们常见的空指针一般指向0 地址，即空指针的内部用全0 来表示。<br>   注意：不要把空指针的内部表示等同于整数0 的对象表示——如上所述，有时它们是不同的。不含指针时两者可以等同</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/C语言-NULL和0的区别/" data-id="cjg8vymc50001hspw8hm4jjx3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hexo-在博客插入图片的简单教程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/hexo-在博客插入图片的简单教程/" class="article-date">
+  <time datetime="2018-04-21T04:17:27.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/hexo-在博客插入图片的简单教程/">hexo 在博客插入图片的简单教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  作为一个刚刚开始写博客的新手，笔者也遇到了一个问题，那就是如何博客里插入照片呢？<br>  今天一位大佬教了我一个很简单的方法，即hexo自带的插入图片的方法。<br>  话不多说，开始教程:</p>
+<h2 id="配置-config-yml文件"><a href="#配置-config-yml文件" class="headerlink" title="配置_config.yml文件"></a>配置_config.yml文件</h2>   <img src="/2018/04/21/hexo-在博客插入图片的简单教程/01.png">
+<p>  首先，要把hexo目录下的_config.yml文件打开，找到  post_asset_folder，并把值改成“true”<br>  如图：</p>
+  <img src="/2018/04/21/hexo-在博客插入图片的简单教程/02.png">
+<h2 id="新建一篇博客"><a href="#新建一篇博客" class="headerlink" title="新建一篇博客"></a>新建一篇博客</h2><p>  通过 hexo new 的命令新建一篇博客时，你会发现，除了生成.md格式的文件，还生成了个同名的文件夹，<br>  没错，这个文件夹就是拿来放你要引用的图片的<br>  <img src="/2018/04/21/hexo-在博客插入图片的简单教程/03.png"></p>
+<p>  把你需要用到的图片放到文件夹里，并起个简短好记的名字（方便调用）<br>  <img src="/2018/04/21/hexo-在博客插入图片的简单教程/04.png"></p>
+<h2 id="引用图片"><a href="#引用图片" class="headerlink" title="引用图片"></a>引用图片</h2><p>  接下来 就要隆重介绍调用图片的语句（使用时请将 # 换成空格）了</p>
+<pre><code class="bash">
+{%#asset_img#xxx.png#%}
+</code></pre>
+<p>  xxx 即为图片的名字 ，png即为图片的格式，如果图片格式文件为jpg，则相应的把png改成jpg<br>  此外，还要注意的是 </p>
+<h3 id="要注意空格"><a href="#要注意空格" class="headerlink" title="要注意空格"></a>要注意空格</h3><p>  {}内一共有三个空格，千万不能省略 </p>
+<h2 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h2><p>   将博客推送，你就会发现，你已经成功引用了本地的图片</p>
+   <img src="/2018/04/21/hexo-在博客插入图片的简单教程/05.png">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/hexo-在博客插入图片的简单教程/" data-id="cjg8vymcf0008hspw7lb39u29" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-用递归实现迷宫算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/java-用递归实现迷宫算法/" class="article-date">
+  <time datetime="2018-04-21T04:16:28.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/java-用递归实现迷宫算法/">java 用递归实现迷宫算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>话不多说，上代码：</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;    </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span>  </span></span><br><span class="line"><span class="class"></span>&#123;  </span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> length,wideth;<span class="comment">//迷宫矩阵的长度和宽度  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x,y;<span class="comment">//起始位置的坐标  </span></span><br><span class="line">    <span class="keyword">static</span> String[][] arr;<span class="comment">//迷宫的二维数组  </span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> n;<span class="comment">//当前走的走的步数，初始值设置为10000意为无穷  </span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Scanner in;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </span><br><span class="line">    	in = <span class="keyword">new</span> Scanner (System.in);</span><br><span class="line">    	System.out.println(<span class="string">"输入迷宫的长度、宽度(行数和列数不超过50）"</span>);</span><br><span class="line">    	wideth =in.nextInt();</span><br><span class="line">    	length =in.nextInt();  <span class="comment">//让用户输入迷宫的宽度和长度</span></span><br><span class="line">    	arr = <span class="keyword">new</span> String[wideth][length];</span><br><span class="line">    	System.out.println(<span class="string">"请输入"</span>+wideth+<span class="string">"行"</span>+length+<span class="string">"列的迷宫 ('0'表示墙，'1' 表示道路 '4'表示起点 '5'表示终点 )"</span>);</span><br><span class="line"><span class="comment">//从键盘读取迷宫</span></span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;</span><br><span class="line">				arr[i][j] = in.next();</span><br><span class="line">		      &#125;</span><br><span class="line">			   &#125;</span><br><span class="line"><span class="comment">//遍历一次迷宫，找到起点，记下起点的坐标    </span></span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;	</span><br><span class="line">				<span class="keyword">if</span> (arr[i][j].equals(<span class="string">"4"</span>)) &#123;</span><br><span class="line">					x=i;</span><br><span class="line">					y=j;</span><br><span class="line">                &#125;</span><br><span class="line">		     &#125;</span><br><span class="line">		&#125;</span><br><span class="line"><span class="comment">//开始尝试找出口</span></span><br><span class="line"><span class="keyword">try</span> &#123;	</span><br><span class="line">		Running(x,y,n);</span><br><span class="line">		</span><br><span class="line">&#125;<span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line"><span class="comment">//接收异常，打印数组</span></span><br><span class="line">	     System.out.println();</span><br><span class="line">	     System.out.println(<span class="string">"找到出口！路径如下(*代表路径)："</span>);</span><br><span class="line">	     <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;wideth;i++) &#123;	</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;length;j++) &#123;	</span><br><span class="line">				System.out.print(arr[i][j]);</span><br><span class="line">					<span class="keyword">if</span>(j==length-<span class="number">1</span>) </span><br><span class="line">						 System.out.println();</span><br><span class="line">					<span class="keyword">else</span> System.out.print(<span class="string">" "</span>);</span><br><span class="line">					&#125;</span><br><span class="line">		      &#125;</span><br><span class="line">	     </span><br><span class="line">            System.exit(<span class="number">0</span>); <span class="comment">//结束程序</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//如果程序正常退出，说明迷宫没有出口</span></span><br><span class="line">         System.out.println(<span class="string">"该迷宫没有出口！！！"</span>);</span><br><span class="line">		</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">/*找出口的递归函数*/</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Running</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y,<span class="keyword">int</span> n)</span></span>&#123;  </span><br><span class="line">     </span><br><span class="line"><span class="comment">//	 System.out.println(x+" "+y+" "+n);//打印每一步方便理解</span></span><br><span class="line">	 </span><br><span class="line"> </span><br><span class="line"> 		<span class="keyword">if</span>(arr[x][y].equals(<span class="string">"5"</span>)||n==<span class="number">10000</span>)&#123; </span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">1</span>/<span class="number">0</span>; <span class="comment">//当找到出口'5'时，抛出异常，跳出整个递归函数   </span></span><br><span class="line">        &#125; </span><br><span class="line"> 		<span class="keyword">if</span>(!arr[x][y].equals(<span class="string">"4"</span>)) <span class="comment">//若非起点和终点，将该点做个记号"*"表示已经走过</span></span><br><span class="line"> 			arr[x][y]=<span class="string">"*"</span>;</span><br><span class="line"> 		  </span><br><span class="line"><span class="comment">/*判断上下左右有没有终点*/</span></span><br><span class="line">        <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x][y-<span class="number">1</span>].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"5"</span>))&#123;  </span><br><span class="line">            Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line"><span class="comment">/*如果没有终点，则看上下左右有没有道路*/</span>  </span><br><span class="line">        <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  <span class="comment">//向下</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  <span class="comment">//向右</span></span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;(arr[x][y-<span class="number">1</span>].equals(<span class="string">"1"</span>)))&#123;  </span><br><span class="line">            Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  <span class="comment">//向左</span></span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"1"</span>))&#123;  </span><br><span class="line">            Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  <span class="comment">//向上</span></span><br><span class="line">        &#125;   </span><br><span class="line"></span><br><span class="line">         arr[x][y]=<span class="string">"#"</span>; <span class="comment">//如果没有道路,说明是死胡同，将改点标记为“#”</span></span><br><span class="line"><span class="comment">/* 再看上下左右有没有之前走过的路并返回之前走过的路*/</span></span><br><span class="line">         <span class="keyword">if</span>(y-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;(arr[x][y-<span class="number">1</span>].equals(<span class="string">"*"</span>)))&#123;  </span><br><span class="line">             Running(x,y-<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(x-<span class="number">1</span>&gt;=<span class="number">0</span>&amp;&amp;arr[x-<span class="number">1</span>][y].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x-<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(y+<span class="number">1</span>&lt;length&amp;&amp;arr[x][y+<span class="number">1</span>].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x,y+<span class="number">1</span>,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line">         <span class="keyword">if</span>(x+<span class="number">1</span>&lt;wideth&amp;&amp;arr[x+<span class="number">1</span>][y].equals(<span class="string">"*"</span>))&#123;  </span><br><span class="line">             Running(x+<span class="number">1</span>,y,n+<span class="number">1</span>);  </span><br><span class="line">         &#125;  </span><br><span class="line"> <span class="comment">/*     如果上诉条件都不满足，说明该方向的道路是死路，该层递归结束，返回上一层递归 </span></span><br><span class="line"><span class="comment">       以此类推，直到返回第一层递归，继续找其他方向的路。</span></span><br><span class="line"><span class="comment">       在第一层递归中，如果上述条件都不满足，说明迷宫没有出口</span></span><br><span class="line"><span class="comment">       程序正常退出，不会抛出异常</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">         &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行效果图："><a href="#运行效果图：" class="headerlink" title="运行效果图："></a>运行效果图：</h2><img src="/2018/04/21/java-用递归实现迷宫算法/01.png">  
+<img src="/2018/04/21/java-用递归实现迷宫算法/02.png"> 
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/java-用递归实现迷宫算法/" data-id="cjg8vymcp000ihspw4dkf99xl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-拓展数组长度的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/java-拓展数组长度的方法/" class="article-date">
+  <time datetime="2018-04-21T04:15:56.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/java-拓展数组长度的方法/">java 拓展数组长度的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>数组是我们编程常用到的一种最简单的数据结构，操作简单，功能强大。<br>但是也是一个缺点，就是一旦创建了数组，就不能改变它的大小。如果申请一个超大的内存空间，又容易造成空间浪费，<br>那有什么办法可以克服这个缺点呢？</p>
+<h2 id="思路一：数组拷贝"><a href="#思路一：数组拷贝" class="headerlink" title="思路一：数组拷贝"></a>思路一：数组拷贝</h2><p>在java里，允许将一个数组变量拷贝给另一个数值变量。此时，<em>两个变量将引用同一个数组</em> 。<br>如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">intint[]a=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">int</span>[]b=a;</span><br><span class="line">a[<span class="number">1</span>]=<span class="number">4</span>;<span class="comment">//现在b[1]也等于4</span></span><br></pre></td></tr></table></figure></p>
+<p>这时候我们就希望一个数组的所有值拷贝到一个新的数组，就要使用Arrays类的copyOf方法。</p>
+<pre><code>int[] copy = Arrays.copyOf(array,2*array.length);//第一个参数是待拷贝的int型的数组对象，第二个是新数组的长度
+</code></pre><p>现在我们就实现了将array数组里的所有值拷贝到了一个长度为原数组两倍的新数组copy里，达到了拓展数组的目的。<br>需要说明的是：<br>如果数组元素是数值型，那么多余的元素将被赋值为0；如果为布尔值，则被赋值为false。<br>相反，如果新数组的长度小于原数组的长度，则只拷贝最前面的数据元素。</p>
+<h2 id="思路二：使用泛型数组列表"><a href="#思路二：使用泛型数组列表" class="headerlink" title="思路二：使用泛型数组列表"></a>思路二：使用泛型数组列表</h2><p>在java里，有一个ArrayList的泛型类，它使用起来有点像数组，但是在添加或删除元素时，具有自动调节数组容量的功能，而不需要编写另外的代码。</p>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre><code>ArrayList&lt;Object&gt; staff =new ArrayList&lt;&gt;();
+</code></pre><h4 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h4><p>1、&lt;&gt;里是具体的元素对象类型，可以是自定义的类型（自己编写的类），也可以String类型，但不能是像int double这样的基本类型，必须使用基本类型对应的对象包装器（如Integer，Double）<br>    ArrayList<int> staff =new ArrayList<int>();//错误<br>    ArrayList<integer> staff =new ArrayList<integer>();//正确<br>2，有几种声明方法：<br>    ArrayList<string> staff =new ArrayList<string>();<br>    ArrayList<string> staff =new ArrayList&lt;&gt;();//和上面等价。java SE7中，可以省去右边的类型参数，编译器会正确推断出正确的类型参数</string></string></string></integer></integer></int></int></p>
+<pre><code>ArrayList&lt;String&gt; staff =new ArrayList&lt;&gt;(100);//将构造一个初始容量为100的数组列表，但这并不是最终容纳量
+                                              //数组列表满了后，会自动重新分配空间，之后容量将超过100
+</code></pre><h3 id="数组列表的操作方法"><a href="#数组列表的操作方法" class="headerlink" title="数组列表的操作方法"></a>数组列表的操作方法</h3><p>天下没有免费的午餐，自动扩容的数组列表操作时虽然不用担心容量问题，但操作元素要比数组复杂一点，不能方便的访问数组元素</p>
+<pre><code>boolean add(E obj) //在尾部添加元素，永远返回true
+boolean add(int index,E obj) // 在指定位置插入元素，该位置之后的元素都向后移动一个位置，数组大小加一
+boolean remove(int i) // 删除指定位置的元素，该位置之后的元素都向前移动一个位置，数组大小减一
+boolean set(int index,E obj) // 用新元素覆盖（代替）指定位置的元素
+E get(int i) // 返回指定位置的元素
+int size() // 返回存储在数组列表的当前元素数量
+void trimToSize() // 将数组的存储容量削减到当前尺寸
+</code></pre><p>示例代码如下</p>
+<pre><code class="java"><span class="keyword">import</span> java.time.*;
+<span class="keyword">import</span> java.util.*;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayListTest</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        ArrayList&lt;Employee&gt; staff = <span class="keyword">new</span> ArrayList&lt;&gt;();<span class="comment">// 未定长度的数组</span>
+        staff.add(<span class="keyword">new</span> Employee(<span class="string">"Carl"</span>, <span class="number">75000</span>, <span class="number">1987</span>, <span class="number">12</span>, <span class="number">15</span>));
+        staff.add(<span class="keyword">new</span> Employee(<span class="string">"Harry"</span>, <span class="number">50000</span>, <span class="number">1989</span>, <span class="number">10</span>, <span class="number">1</span>));
+        staff.add(<span class="keyword">new</span> Employee(<span class="string">"Bob"</span>, <span class="number">40000</span>, <span class="number">1990</span>, <span class="number">3</span>, <span class="number">15</span>));
+
+        <span class="keyword">for</span>(Employee e : staff) {
+            System.out.println(e);
+        }
+        System.out.println(staff.get(<span class="number">1</span>));<span class="comment">// 访问staff里元素需要用get（）方法        </span>
+    }
+
+
+    }    
+<span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>{
+    <span class="keyword">private</span> String name;
+    <span class="keyword">private</span> <span class="keyword">double</span> salary;
+    <span class="keyword">private</span> LocalDate hireDay;
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Employee</span><span class="params">(String name, <span class="keyword">double</span> salary, <span class="keyword">int</span> year, <span class="keyword">int</span> month, <span class="keyword">int</span> day)</span> </span>{
+        <span class="keyword">this</span>.name = name;
+        <span class="keyword">this</span>.salary = salary;
+        hireDay = LocalDate.of(year, month, day);
+
+    }
+    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> name;
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getSalary</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> salary;
+    }
+
+    <span class="function"><span class="keyword">public</span> LocalDate <span class="title">getHireDay</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> hireDay;
+    }
+    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>{ <span class="comment">//重写toString方法，便于对象的格式化打印</span>
+        <span class="keyword">return</span> getClass().getName()+<span class="string">"[name="</span>+name+<span class="string">",salary"</span>+salary+<span class="string">",hirsDay"</span>+hireDay+<span class="string">"]"</span>;
+    }
+}
+</code></pre>
+<h4 id="分享个小技巧"><a href="#分享个小技巧" class="headerlink" title="分享个小技巧"></a>分享个小技巧</h4><p>有个小技巧让你既可以灵活的拓展数组，又可以方便的访问数组元素。</p>
+<ol>
+<li>首先，创建一个数组，并添加需要添加所有需要添加的元素<br> ArrayList<x> staff =new ArrayList&lt;&gt;();//X表示元素对象类型<br> while(…){                           //添加所有元素<br> x=…;<br> staff.add(x);<br> }</x></li>
+<li>利用toArray方法将数组元素拷贝到一个数组中<br> X[] list = new X[staff.size()]; //创建一个相同长度的数组<br> staff.toArray(list); </li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/java-拓展数组长度的方法/" data-id="cjg8vymcf000ahspwgkza4hcb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-大数的简单介绍及应用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/java-大数的简单介绍及应用/" class="article-date">
+  <time datetime="2018-04-21T04:14:52.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/java-大数的简单介绍及应用/">java 大数的简单介绍及应用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在某些情况下，我们需要计算一些很大的数，比如求一个数的阶乘，这样的场景下，long 也不能胜任这样的大数的表示。<br>所幸，java为我们提供的强大且方便的大数类供我们使用。</p>
+<h2 id="BigInteger类介绍"><a href="#BigInteger类介绍" class="headerlink" title="BigInteger类介绍"></a>BigInteger类介绍</h2><h3 id="声明-amp-赋值方式"><a href="#声明-amp-赋值方式" class="headerlink" title="声明&amp;赋值方式"></a>声明&amp;赋值方式</h3><p>声明：BigInteger bi；<br>赋值：<br>1、 bi=BigInteger.valueOf(100);  //直接赋值法<br>2、 Scanner in= new Scanner(System.in);<br>    bi=in.nextBigInteger();     //从键盘读取<br>3、 bi=new BigInteger(“100”);    //调用构造方法，还有其他构造方法，请自行百度</p>
+<h3 id="三个常量"><a href="#三个常量" class="headerlink" title="三个常量"></a>三个常量</h3><p>BigInteger.ZERO, BigInteger.ONE, BigInteger.TEN 分别对应 0，1,10 。</p>
+<h3 id="常用的方法"><a href="#常用的方法" class="headerlink" title="常用的方法"></a>常用的方法</h3><p>BigInteger a,b;<br>add 两数相加：a.add(b) // 下列方法用法和加法类似<br>subtract 减<br>multiply 乘<br>divide   除<br>mod     取模<br>pow     乘方<br>equals  判断是否相等<br>compareTo 判断大小 a.compareTo(b) a&gt;b 返回1； a=b 返回0 ； a&lt;b 返回-1;</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>用大数类求任意整数的阶乘（用递归实现)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fac</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> BigInteger <span class="title">fac</span><span class="params">(BigInteger n)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n.equals(BigInteger.ZERO)||n.equals(BigInteger.ONE)) <span class="keyword">return</span> BigInteger.ONE; <span class="comment">// if(n==1||n==0) return 1;</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> n.multiply(fac(n.subtract(BigInteger.ONE)));                       <span class="comment">// else return n*fac(n-1);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BigInteger n;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        System.out.println(<span class="string">"输入整数："</span>);</span><br><span class="line">        n=in.nextBigInteger();</span><br><span class="line">        System.out.println(n+<span class="string">" 的阶乘为： "</span>+fac(n));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/java-大数的简单介绍及应用/" data-id="cjg8vymcf000fhspwgvpd0etc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言-栈的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/C语言-栈的实现/" class="article-date">
+  <time datetime="2018-04-21T04:13:54.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/C语言-栈的实现/">C语言 栈的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="comment">// 宏定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INFEASIBLE -1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OVERFLOW -2</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKINCREMENT 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"><span class="comment">// 栈的顺序结构表示</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	ElemType* base;</span><br><span class="line">	ElemType* top;</span><br><span class="line">	<span class="keyword">int</span> stacksize;</span><br><span class="line">&#125;SqStack;</span><br><span class="line"><span class="comment">//初始化一个空栈 </span></span><br><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack&amp; S)</span> </span>&#123;</span><br><span class="line">	S.base=(ElemType*)<span class="built_in">malloc</span>(STACK_INIT_SIZE*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">	<span class="keyword">if</span>(!S.base) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	S.top=S.base;</span><br><span class="line">	S.stacksize=STACK_INIT_SIZE;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//销毁栈 </span></span><br><span class="line"><span class="function">Status <span class="title">DestroyStack</span><span class="params">(SqStack&amp; S)</span></span>&#123;</span><br><span class="line">	S.top=<span class="literal">NULL</span>;</span><br><span class="line">	S.stacksize=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">free</span>(S.base);</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//清空栈 </span></span><br><span class="line"><span class="function">Status <span class="title">ClearStack</span><span class="params">(SqStack&amp; S)</span></span>&#123;</span><br><span class="line">	S.top=S.base;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">//判断栈是否为空</span></span><br><span class="line"><span class="function">Status <span class="title">StackEmpty</span><span class="params">(SqStack S)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top==S.base) </span><br><span class="line">	  <span class="keyword">return</span> <span class="literal">true</span>;<span class="comment">//空为真 </span></span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	  <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//  非空为假 </span></span><br><span class="line">	  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//求栈的长度</span></span><br><span class="line"><span class="function">Status <span class="title">StackLength</span><span class="params">(SqStack S)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (S.top-S.base);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//求栈顶元素</span></span><br><span class="line"><span class="function">Status <span class="title">GetTop</span><span class="params">(SqStack S,ElemType &amp;e)</span></span>&#123;</span><br><span class="line">     <span class="keyword">if</span>(S.top==S.base) &#123;</span><br><span class="line">     	<span class="built_in">printf</span>(<span class="string">"空栈~"</span>);</span><br><span class="line">       <span class="keyword">return</span> FALSE;</span><br><span class="line">	 &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      </span><br><span class="line">      e=*(S.top<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入栈</span></span><br><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">(SqStack&amp; S,ElemType e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.top-S.base&gt;=S.stacksize)&#123; <span class="comment">// 满栈 </span></span><br><span class="line">		S.base=(ElemType*)<span class="built_in">realloc</span>(S.base,(S.stacksize+STACKINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line">		<span class="keyword">if</span>(!S.base)</span><br><span class="line">		  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		S.top=S.base+S.stacksize;<span class="comment">//栈底地址可能改变，重新定位栈顶元素</span></span><br><span class="line">		S.stacksize+=STACKINCREMENT;</span><br><span class="line">	&#125;</span><br><span class="line">	*S.top=e;</span><br><span class="line">	S.top++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//出栈 </span></span><br><span class="line"><span class="function">Status <span class="title">Pop</span><span class="params">(SqStack&amp; S,ElemType&amp; e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.base==S.top)&#123;  <span class="comment">//空栈 </span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"空栈~"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">    S.top--;</span><br><span class="line">    e=*S.top;</span><br><span class="line">	   <span class="comment">//说明：此处容易使人迷惑，实际上此元素并没真正删除，仍在S.top中，</span></span><br><span class="line">	   <span class="comment">//但是如果插入元素，就会被更新，就像是删除了一样  </span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历栈 </span></span><br><span class="line"><span class="function">Status <span class="title">StackTraverse</span><span class="params">(SqStack S)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(S.base==<span class="literal">NULL</span>) </span><br><span class="line">	   <span class="keyword">return</span> ERROR;</span><br><span class="line">	<span class="keyword">if</span>(S.base==S.top) </span><br><span class="line">	 <span class="built_in">printf</span>(<span class="string">"栈中没有元素~~\n"</span>);</span><br><span class="line">	ElemType* p;</span><br><span class="line">	p=S.top;</span><br><span class="line">	<span class="keyword">while</span>(p&gt;S.base)&#123; <span class="comment">//从栈顶向栈低遍历 </span></span><br><span class="line">		p--; </span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">   SqStack s;</span><br><span class="line">   InitStack(s);<span class="comment">//初始化</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">150</span>;i++)&#123;</span><br><span class="line">   	Push(s,i);<span class="comment">//入栈 </span></span><br><span class="line">   &#125; </span><br><span class="line">   StackTraverse(s);<span class="comment">//遍历 </span></span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"栈顶的长度为，%d\n"</span>,StackLength(s));</span><br><span class="line">   <span class="keyword">int</span> n;</span><br><span class="line">   Pop(s,n);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"出栈的元素为：%d\n\n"</span>,n);</span><br><span class="line">   GetTop(s,n);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"现在栈顶的元素为：%d\n\n"</span>,n); </span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"清空栈~~\n\n"</span>) ;</span><br><span class="line">   ClearStack(s);</span><br><span class="line">   <span class="built_in">printf</span>(<span class="string">"栈现在为：%d\n"</span>,StackEmpty(s)); </span><br><span class="line">    </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/C语言-栈的实现/" data-id="cjg8vymcf000dhspwvonlxaiq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言-命令行模仿密码输入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/C语言-命令行模仿密码输入/" class="article-date">
+  <time datetime="2018-04-21T04:13:09.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/C语言-命令行模仿密码输入/">C语言 命令行模仿密码输入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 今天碰到个很有趣的问题：<br>怎么用C语言怎么实现类似密码输入的效果？（输入一个字符时用*号表示）</p>
+<p>群里就有大佬回答了这个问题：<br>有个好玩的函数的 叫getch（注意与getchar区分）</p>
+<h2 id="getch函数介绍如下"><a href="#getch函数介绍如下" class="headerlink" title="getch函数介绍如下"></a>getch函数介绍如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getch();</span><br><span class="line">头文件 ：conio.h</span><br><span class="line">函数用途：从控制台读取一个字符，但不显示在屏幕上</span><br><span class="line">函数原型：int getch(void)</span><br><span class="line">返回值：读取的字符</span><br></pre></td></tr></table></figure>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.在使用之前要调用initscr()，结束时要调用endwin()。否则会出现不输入字符这个函数<br>　　也会返回的情况。<br>2.在不同平台，输入回车，getch()将返回不同数值，而getchar()统一返回10(即\n)<br>（1)windows平台下ENTER键会产生两个转义字符 \r\n，因此getch返回13(\r)。<br>（2)unix、 linux系统中ENTER键只产生 \n ，因此getch返回10(\n)。<br>（3)MAC OS中ENTER键将产生 \r ，因此getch返回13(\r)。<br>3.getch();并非标准C中的函数，不存在C语言中。所以在使用的时候要注意程序的可移植性。</p>
+<h2 id="e-g"><a href="#e-g" class="headerlink" title="e.g"></a>e.g</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;conio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	int d=0;</span><br><span class="line">	char password[18];</span><br><span class="line">	char ch;</span><br><span class="line">	<span class="keyword">while</span>((ch=_getch())!=<span class="string">'\r'</span>)&#123;//如果输入的不是回车 </span><br><span class="line">		<span class="keyword">if</span>(ch!=<span class="string">'\b'</span>)&#123;    //如果输入的不是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"*"</span>);  //打印一个 * 代表输入一个字符 </span><br><span class="line">			password[d++]=ch;  //先把字符存在password[d]里，然后d++； </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;   // 如果输入的是退格键 </span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"\b \b"</span>); //将光标左移一格，用空格代替*，再左移一格 </span><br><span class="line">			d--;   </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	puts(password);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/C语言-命令行模仿密码输入/" data-id="cjg8vymc50004hspwkni1caac" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C语言-qsort函数详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/21/C语言-qsort函数详解/" class="article-date">
+  <time datetime="2018-04-21T04:11:48.000Z" itemprop="datePublished">2018-04-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/21/C语言-qsort函数详解/">C语言 qsort函数详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  有一段时间，当需要对数组进行排序的时候，就不得不自己编写一个冒泡或者选择排序法，费时费力不说，排序效率也不高。<br>  其实，C语言为我们提供了一个实现了快速排序的函数qsort，对于较大型数组而言，“快速排序算法”是最有效的排序算法之一。</p>
+<h2 id="函数原型及说明"><a href="#函数原型及说明" class="headerlink" title="函数原型及说明"></a>函数原型及说明</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">函数原型： void qsort(void * base, size_t nmemb,size_t size ,int(*compar)(const void *,const void *))</span><br><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line">第1个参数是指针，指向待排序数组的首元素（可以引用任意类型的数组）</span><br><span class="line">第2个参数是待排序项的数量。（size_t 是sizeof运算符返回的整数类型）</span><br><span class="line">第3个参数是待排序数组中，每个元素的大小（所占字节数）</span><br><span class="line">第4个参数是一个函数指针，这个被指针指向的函数用与确定排序的顺序，该函数返回int型且接受两个指向const void的指针作为参数，这两个指针指向待比较项</span><br></pre></td></tr></table></figure>
+<h3 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">/* 用qsort排序一组数据 */ </span><br><span class="line"><span class="comment">#include&lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;stdlib.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#define NUM 40 //定义数组长度 </span></span><br><span class="line">void fillList(double* list,int n);</span><br><span class="line">void showList(double* list,int n);</span><br><span class="line">int mycompare(const void * p1,const void * p2);</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line">	double list[NUM];</span><br><span class="line">	fillList(list,NUM);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序前: \n"</span>);</span><br><span class="line">	showList(list,NUM);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"排序后:\n"</span>);</span><br><span class="line">	qsort(list,NUM,sizeof(double),mycompare);</span><br><span class="line">	showList(list,NUM);</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">void fillList(double* list,int n)&#123; //用随机数填充数组 </span><br><span class="line">	<span class="keyword">for</span>(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		list[i]=(double) rand()/((double) rand()+0.1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void showList(double* list,int n)&#123; //打印数组 </span><br><span class="line">	<span class="keyword">for</span> (int i=0;i&lt;n;i++)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%9.4f"</span>,list[i]);</span><br><span class="line">		<span class="keyword">if</span>(i%6==5) <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">int mycompare(const void * p1,const void * p2)&#123; //需要自己编写的排序函数  作用是将数组按照升序排序 </span><br><span class="line">	double* a1=(double*) p1; </span><br><span class="line">	double* a2=(double*) p2; //将传入的void指针通过强制类型转换成待排序的数组的类型 </span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(*a1&gt;*a2) <span class="built_in">return</span> 1; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(*a1&lt;*a2) <span class="built_in">return</span> -1;  </span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">return</span> 0;// 相等返回 0 </span><br><span class="line">&#125;</span><br><span class="line">//int mycompare(const void * p1,const void * p2)&#123;//作用是将数组按降序排序 </span><br><span class="line">//	double* a1=(double*) p1; </span><br><span class="line">//	double* a2=(double*) p2; //将传入的void指针通过强制类型转换成待排序的数组的类型 </span><br><span class="line">//	</span><br><span class="line">//	<span class="keyword">if</span>(*a1&gt;*a2) <span class="built_in">return</span> -1; </span><br><span class="line">//	<span class="keyword">else</span> <span class="keyword">if</span>(*a1&lt;*a2) <span class="built_in">return</span> 1;  </span><br><span class="line">//	<span class="keyword">else</span> <span class="built_in">return</span> 0;// 相等返回 0 </span><br><span class="line">//&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行效果图"><a href="#运行效果图" class="headerlink" title="运行效果图"></a>运行效果图</h2><img src="/2018/04/21/C语言-qsort函数详解/01.png">
+<h3 id="最后说明"><a href="#最后说明" class="headerlink" title="最后说明"></a>最后说明</h3><p>用于比较的函数需要自己编写，并需要能让qsort函数根据返回值进行排序。。<br>一般根据升序或降序的需要 根据大小关系返回 1 -1 0 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/21/C语言-qsort函数详解/" data-id="cjg8vymcf0005hspw8e1lky2j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C语言-const与指针" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/21/C语言-const与指针/" class="article-date">
@@ -109,7 +557,7 @@ const pint p;//简单文本替换，相当于 const int* p;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/21/C语言-const与指针/" data-id="cjg8v80640000wspwy3wg7xhb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/21/C语言-const与指针/" data-id="cjg8vymbv0000hspwexhy3olz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
@@ -133,7 +581,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li></ul>
     </div>
   </div>
 
@@ -143,7 +591,7 @@ const pint p;//简单文本替换，相当于 const int* p;
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 10px;">C</a>
+      <a href="/tags/C/" style="font-size: 20px;">C</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 15px;">java</a>
     </div>
   </div>
 
@@ -165,7 +613,23 @@ const pint p;//简单文本替换，相当于 const int* p;
       <ul>
         
           <li>
-            <a href="/2018/04/21/C语言-const与指针/">C语言 const与指针</a>
+            <a href="/2018/04/21/C语言-对汉字按拼音进行排序/">C语言 对汉字按拼音进行排序</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/C语言-NULL和0的区别/">C语言 NULL和0的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/hexo-在博客插入图片的简单教程/">hexo 在博客插入图片的简单教程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/java-用递归实现迷宫算法/">java 用递归实现迷宫算法</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/21/java-拓展数组长度的方法/">java 拓展数组长度的方法</a>
           </li>
         
       </ul>
